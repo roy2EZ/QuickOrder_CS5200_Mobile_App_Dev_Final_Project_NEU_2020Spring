@@ -17,6 +17,8 @@ import com.cs5520.quickerorder.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    // TODO: welcome screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
