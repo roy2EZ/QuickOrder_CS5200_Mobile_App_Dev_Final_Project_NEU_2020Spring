@@ -37,12 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-    GoogleApiClient.OnConnectionFailedListener, ResultCallback<Status> {
+public class MainActivity extends AppCompatActivity  {
     private static final String TAG = "Main";
-    protected List<Geofence> mGeofenceList;
-    protected GoogleApiClient mGoogleApiClient;
-    // private Button mAddGeofencesButton;
 
     // TODO: welcome screen
     @Override
@@ -50,27 +46,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mGeofenceList = new ArrayList<Geofence>();
-
-        // Get the geofences used. Geofence data is hard coded in this sample.
-        populateGeofenceList();
-
-        // Kick off the request to build GoogleApiClient.
-        buildGoogleApiClient();
-
-
-
-
-
     }
 
     public void gotoMainService(View view) {
-        /*
+
         Intent i = new Intent(this, MainService.class);
         startActivity(i);
-
-         */
-
+    }
+    /*
         if (!mGoogleApiClient.isConnected()) {
             Toast.makeText(this, "Google API Client not connected!", Toast.LENGTH_SHORT).show();
             return;
@@ -170,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling addgeoFences()
         return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
+
+     */
 
 
 }
