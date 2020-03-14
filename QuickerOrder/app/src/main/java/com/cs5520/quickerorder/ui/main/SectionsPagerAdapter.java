@@ -1,6 +1,8 @@
 package com.cs5520.quickerorder.ui.main;
 
 import android.content.Context;
+import android.nfc.Tag;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -8,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.cs5520.quickerorder.FragmentCallService;
+import com.cs5520.quickerorder.FragmentMenu;
 import com.cs5520.quickerorder.R;
 
 /**
@@ -15,9 +19,11 @@ import com.cs5520.quickerorder.R;
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.full_menu, R.string.recommendation, R.string.call_service};
+    private static final String TAG = "SectionsPagerAdapter";
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -29,7 +35,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        switch (position) {
+            case 0:
+            case 1:
+                Log.d(TAG, "getItem: " + position);
+                return new FragmentMenu();
+            case 2:
+                Log.d(TAG, "getItem: call service fragment");
+                return new FragmentCallService();
+            default:
+                return null;
+        }
     }
 
     @Nullable
@@ -40,7 +56,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
-        return 2;
+        // Show 3 total pages.
+        // dynamically
+        return TAB_TITLES.length;
     }
 }
