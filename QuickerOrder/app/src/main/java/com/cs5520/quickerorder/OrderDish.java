@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey;
 
 import java.util.List;
 
-@Entity(tableName = "order")
-public class  Order {
+@Entity(tableName = "orders")
+public class  OrderDish {
     @NonNull
-    @ColumnInfo(name = "orderId")
+    @ColumnInfo(name = "id")
     private int id;
 
     @ColumnInfo(name = "quantity")
