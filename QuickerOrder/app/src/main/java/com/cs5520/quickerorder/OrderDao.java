@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderDao {
 
     @Insert
-    void insertDish(int id);
+    void insertDish(OrderDish orderDish);
 
     @Query("SELECT * FROM orders WHERE id = :id")
     List<OrderDish> findDish(int id);
