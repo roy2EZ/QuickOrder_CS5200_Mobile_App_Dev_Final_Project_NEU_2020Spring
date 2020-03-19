@@ -1,5 +1,6 @@
 package com.cs5520.quickerorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.cs5520.quickerorder.ui.main.SectionsPagerAdapter;
@@ -25,6 +26,7 @@ public class MainService extends FragmentActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
+
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
@@ -33,17 +35,12 @@ public class MainService extends FragmentActivity {
 
         // viewPager.addOnPageChangeListener(new );
 
-/*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    }
 
- */
+    public void gotoMainCheckout(View view) {
+
+        Intent i = new Intent(this, CheckoutActivity.class);
+        startActivity(i);
     }
 
 }
