@@ -57,10 +57,6 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
 
     }
 
-    public int psoIDtoItemId (int pos) {
-        return mDishList.get(pos).getId();
-    }
-
     @Override
     public int getItemCount() {
         return this.mDishList == null ? 0: mDishList.size();

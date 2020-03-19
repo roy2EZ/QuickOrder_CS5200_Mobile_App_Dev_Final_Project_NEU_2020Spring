@@ -9,12 +9,23 @@ public class Dishes extends Item {
     private int id;
     private String name;
     private String pic;
+    private double price;
 
-    public Dishes(int id, String name, String pic) {
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Dishes(int id, String name, String pic, double price) {
         this.id = id;
         this.name = name;
         this.pic = pic;
+        this.price = price;
     }
+
 
     public int getId() {
         return id;
