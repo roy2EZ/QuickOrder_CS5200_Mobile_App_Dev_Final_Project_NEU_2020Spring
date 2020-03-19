@@ -53,6 +53,12 @@ public class MainActivity extends AppCompatActivity  {
         Intent i = new Intent(this, MainService.class);
         startActivity(i);
     }
+
+    public void gotoMainCheckout(View view) {
+
+        Intent i = new Intent(this, CheckoutActivity.class);
+        startActivity(i);
+    }
     /*
         if (!mGoogleApiClient.isConnected()) {
             Toast.makeText(this, "Google API Client not connected!", Toast.LENGTH_SHORT).show();
