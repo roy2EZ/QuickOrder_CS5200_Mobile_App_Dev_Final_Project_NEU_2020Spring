@@ -5,25 +5,27 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "dishes")
 public class Dishes extends Item {
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "id")
     private int id;
-
-    @NonNull
-    @ColumnInfo(name = "name")
     private String name;
-
-    @ColumnInfo(name = "pic")
     private String pic;
+    private double price;
 
-    public Dishes(int id, String name, String pic) {
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Dishes(int id, String name, String pic, double price) {
         this.id = id;
         this.name = name;
         this.pic = pic;
+        this.price = price;
     }
+
 
     public int getId() {
         return id;
@@ -33,12 +35,11 @@ public class Dishes extends Item {
         this.id = id;
     }
 
-    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
