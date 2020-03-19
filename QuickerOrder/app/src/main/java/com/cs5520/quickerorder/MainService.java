@@ -15,25 +15,30 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 
+import java.util.List;
+
 public class MainService extends FragmentActivity {
+    private List<Dishes> menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_service);
-        // Toolbar toolbar = findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
+        Dishes d1 = new Dishes(1, "Big Mac", "pic1");
+        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", "pic2");
+        Dishes d3 = new Dishes(3, "Fillet Fish", "pic3");
+        menu.add(d1);
+        menu.add(d2);
+        menu.add(d3);
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
-        // viewPager.addOnPageChangeListener(new );
 
     }
 

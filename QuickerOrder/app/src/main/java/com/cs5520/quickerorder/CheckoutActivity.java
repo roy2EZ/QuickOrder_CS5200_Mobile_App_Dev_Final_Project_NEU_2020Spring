@@ -68,6 +68,8 @@ public class CheckoutActivity extends AppCompatActivity {
  */
     }
 
+
+
     private void recyclerSetup() {
         // RecyclerView recyclerView;
         adapter = new CheckoutListAdapter(R.layout.card_dish);
