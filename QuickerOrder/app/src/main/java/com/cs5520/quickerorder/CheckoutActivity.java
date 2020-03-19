@@ -1,23 +1,14 @@
 package com.cs5520.quickerorder;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -56,20 +47,25 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
     private void observerSetup() {
-        mViewModel.getAllWebs().observe(this, new Observer<List<OrderDish>>() {
-            @Override
-            public void onChanged(@Nullable final List<OrderDish> dishes) {
-                if(mOrder.size() > 0){
-                    mOrder.clear();
-                }
-                if(dishes != null){
-                    mOrder.addAll(dishes);
-                }
-                adapter.notifyDataSetChanged();
-
+        mViewModel.getAllDishes().observe(this, new Observer<List<OrderDish>>() {
+            @Override public void onChanged(@Nullable final List<OrderDish> dishes) {
                 adapter.setmDishList(dishes);
             }
         });
+/*
+        mViewModel.getSearchResults().observe(this, new Observer<List<Product>>() {
+            @Override public void onChanged(@Nullable final List<Product> products) {
+                if (products.size() > 0) {
+                    productId.setText(String.format(Locale.US, "%d", products.get(0).getId()));
+                    productName.setText(products.get(0).getName());
+                    productQuantity.setText(String.format(Locale.US, "%d", products.get(0).getQuantity()));
+                } else {
+                    productId.setText("No Match");
+                }
+            }
+        });
+
+ */
     }
 
     private void recyclerSetup() {

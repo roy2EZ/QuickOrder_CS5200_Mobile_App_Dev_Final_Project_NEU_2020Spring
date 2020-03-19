@@ -10,12 +10,18 @@ import java.util.List;
 
 @Entity(tableName = "orders")
 public class  OrderDish {
+    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     private int id;
 
     @ColumnInfo(name = "quantity")
     private int quantity;
+
+    public OrderDish(int id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
 
     public int getId() {
         return id;

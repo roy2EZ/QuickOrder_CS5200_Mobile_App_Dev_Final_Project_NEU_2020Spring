@@ -20,16 +20,16 @@ public class MainViewModel extends AndroidViewModel {
         // searchResults = repository.getSearchResults();
     }
 
-        public LiveData<List<OrderDish>> getAllWebs() {
+    public LiveData<List<OrderDish>> getAllDishes() {
         return allDishes;
     }
 
 
-        public void insertDish(OrderDish dish) {
+    public void insertDish(OrderDish dish) {
         repository.insertDish(dish);
     }
 
-        public void deleteDish(int id) {
+    public void deleteDish(int id) {
         repository.deleteDish(id);
     }
-    }
+}
