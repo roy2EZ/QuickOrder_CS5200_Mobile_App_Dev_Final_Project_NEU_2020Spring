@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,5 +56,14 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         startActivity(intent);
 
          */
+
+        Fragment fragmentDishPage = new FragmentDishPage();
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.view_pager, fragmentDishPage);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
