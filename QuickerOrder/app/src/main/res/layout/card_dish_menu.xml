@@ -21,14 +21,11 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/dish_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="15sp"
-            android:textStyle="italic" />
+            android:text="TextView" />
 
     </LinearLayout>
 

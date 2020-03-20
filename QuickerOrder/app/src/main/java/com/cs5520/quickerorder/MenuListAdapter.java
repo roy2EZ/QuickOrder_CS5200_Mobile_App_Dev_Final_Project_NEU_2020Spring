@@ -14,9 +14,13 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
     private int menuFragmentLayout;
     private List<Dishes> menu;
 
+    OnDishClickListener mOnDishClickListener;
 
-    public MenuListAdapter(int menuFragmentLayoutId) {
+
+
+    public MenuListAdapter(int menuFragmentLayoutId, OnDishClickListener mOnDishClickListener) {
         this.menuFragmentLayout = menuFragmentLayoutId;
+        this.mOnDishClickListener = mOnDishClickListener;
 
         menu = new LinkedList<>();
         Dishes d1 = new Dishes(1, "Big Mac", "pic1", 10.0);
@@ -31,18 +35,16 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
         this.menu = menu;
     }
 
-/*
-    public interface OnWebClickListener {
+
+    public interface OnDishClickListener {
         void onItemClick(int pos);
     }
-
-     */
 
     @Override
     public MenuListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(menuFragmentLayout, parent, false);
-        MenuListAdapter.ViewHolder myViewHolder = new MenuListAdapter.ViewHolder(view);
+        MenuListAdapter.ViewHolder myViewHolder = new MenuListAdapter.ViewHolder(view, mOnDishClickListener);
         return myViewHolder;
     }
 
@@ -52,15 +54,22 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
         holder.dishPrice.setText(String.valueOf(menu.get(listPosition).getPrice()));
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView dishName;
         TextView dishPrice;
+        OnDishClickListener mViewHolderOnDishClickListener;
 
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView, OnDishClickListener onDishClickListener) {
             super(itemView);
-
+            mViewHolderOnDishClickListener = onDishClickListener;
             dishName = itemView.findViewById(R.id.dish_name);
             dishPrice = itemView.findViewById(R.id.dish_price);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mViewHolderOnDishClickListener.onItemClick(getAdapterPosition());
         }
 
     }

@@ -1,9 +1,13 @@
 package com.cs5520.quickerorder;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,7 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FragmentMenu extends Fragment {
+
+public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClickListener {
+    private static final String TAG = "FragmentMenu";
     private MenuListAdapter adapter;
     private RecyclerView mRecyclerView;
 
@@ -23,7 +29,7 @@ public class FragmentMenu extends Fragment {
         mRecyclerView = view.findViewById(R.id.recycle_menu);
         mRecyclerView.setHasFixedSize(true);
 
-        adapter = new MenuListAdapter(R.layout.card_dish_menu);
+        adapter = new MenuListAdapter(R.layout.card_dish_menu, this);
 
         // recyclerView = getView().findViewById(R.id.product_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -36,5 +42,17 @@ public class FragmentMenu extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public void onItemClick(int pos) {
+        Log.d(TAG, "onItemClick: Found");
+        Toast.makeText(getContext(), "click", (int) 10).show();
+        /*
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWebList.get(pos).getWeb_url()));
+        Log.d(TAG, "onItemClick: " + intent.toString());
+        startActivity(intent);
+
+         */
     }
 }
