@@ -23,8 +23,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClickListener {
@@ -80,17 +82,17 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
     @Override
     public void onItemClick(int pos) {
-        Log.d(TAG, "onItemClick: Found");
+        Log.d(TAG, "onItemClick: Found" + pos);
         Toast.makeText(getContext(), "click", (int) 10).show();
 
 
 
 
-        showPopupWindow(pos);
+        showPopupWindow(menu.get(pos));
 
     }
 
-    private void showPopupWindow(int id) {
+    private void showPopupWindow(Dishes dish) {
         //设置contentView
         View contentView = LayoutInflater.from(this.getContext()).inflate(R.layout.popup_menu, null);
 
@@ -100,7 +102,10 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         //设置各个控件的点击响应
         ImageButton closeBtn = (ImageButton) contentView.findViewById(R.id.btn_close_pop);
         TextView dishName = (TextView) contentView.findViewById(R.id.dish_name_pop);
-        dishName.setText(menu.get(id).getName());
+        TextView dishPrice = (TextView) contentView.findViewById(R.id.dish_price_pop);
+        dishName.setText(dish.getName());
+        dishPrice.setText(String.valueOf(dish.getPrice()));
+
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
