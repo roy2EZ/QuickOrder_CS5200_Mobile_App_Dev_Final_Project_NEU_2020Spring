@@ -18,17 +18,12 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
 
 
 
-    public MenuListAdapter(int menuFragmentLayoutId, OnDishClickListener mOnDishClickListener) {
+    public MenuListAdapter(int menuFragmentLayoutId, OnDishClickListener mOnDishClickListener, List<Dishes> l) {
         this.menuFragmentLayout = menuFragmentLayoutId;
         this.mOnDishClickListener = mOnDishClickListener;
 
-        menu = new LinkedList<>();
-        Dishes d1 = new Dishes(1, "Big Mac", "pic1", 10.0);
-        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", "pic2", 5.5);
-        Dishes d3 = new Dishes(3, "Fillet Fish", "pic3", 9.99);
-        menu.add(d1);
-        menu.add(d2);
-        menu.add(d3);
+        menu = l;
+
     }
 
     public void setMenu(List<Dishes> menu) {

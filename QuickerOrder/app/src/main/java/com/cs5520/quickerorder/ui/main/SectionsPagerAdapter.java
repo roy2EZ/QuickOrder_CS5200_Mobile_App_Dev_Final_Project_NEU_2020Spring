@@ -3,7 +3,9 @@ package com.cs5520.quickerorder.ui.main;
 import android.content.Context;
 import android.nfc.Tag;
 import android.util.Log;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -25,25 +27,42 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.full_menu, R.string.recommendation, R.string.call_service};
     private static final String TAG = "SectionsPagerAdapter";
     private final Context mContext;
+    private Fragment fullmenu;
+    private Fragment recommandation;
+    private  Fragment callservice;
+
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
+
+        fullmenu = new FragmentMenu();
+        recommandation = new FragmentMenu();
+        callservice = new FragmentCallService();
+
     }
+/*
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        super.destroyItem(container, position, object);
+    }
+
+ */
 
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
 
+
+
         switch (position) {
             case 0:
+                return fullmenu;
             case 1:
-                Log.d(TAG, "getItem: " + position);
-                return new FragmentMenu();
+                return recommandation;
             case 2:
-                Log.d(TAG, "getItem: call service fragment");
-                return new FragmentCallService();
+                return callservice;
             default:
                 return null;
         }
