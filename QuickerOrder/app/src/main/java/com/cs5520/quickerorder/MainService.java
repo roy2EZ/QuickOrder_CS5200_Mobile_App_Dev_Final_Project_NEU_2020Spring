@@ -1,6 +1,8 @@
 package com.cs5520.quickerorder;
 
 import android.content.Intent;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
 import android.os.Bundle;
 
 import com.cs5520.quickerorder.ui.main.SectionsPagerAdapter;
@@ -15,10 +17,20 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainService extends FragmentActivity {
     // private List<Dishes> menu;
+
+    private GestureLibrary gLibrary;
+
+    private Map<Dishes, Integer> order;
+
+    public Map<Dishes, Integer> getOrder() {
+        return order;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +38,34 @@ public class MainService extends FragmentActivity {
         setContentView(R.layout.activity_main_service);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-/*
-        Dishes d1 = new Dishes(1, "Big Mac", "pic1");
-        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", "pic2");
-        Dishes d3 = new Dishes(3, "Fillet Fish", "pic3");
-        menu.add(d1);
-        menu.add(d2);
-        menu.add(d3);
-
- */
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
+
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+        order = new HashMap<>();
+
+
+        gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        if (!gLibrary.load()) {
+            finish();
+        }
+
 
     }
 
     public void gotoMainCheckout(View view) {
-
         Intent i = new Intent(this, CheckoutActivity.class);
         startActivity(i);
     }
+
+    public GestureLibrary passTo() {
+        return this.gLibrary;
+    }
+
+
 
 }
