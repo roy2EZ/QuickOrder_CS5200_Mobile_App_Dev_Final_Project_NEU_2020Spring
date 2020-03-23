@@ -17,12 +17,20 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainService extends FragmentActivity {
     // private List<Dishes> menu;
 
     private GestureLibrary gLibrary;
+
+    private Map<Dishes, Integer> order;
+
+    public Map<Dishes, Integer> getOrder() {
+        return order;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,8 @@ public class MainService extends FragmentActivity {
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+        order = new HashMap<>();
 
 
         gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
@@ -55,5 +65,7 @@ public class MainService extends FragmentActivity {
     public GestureLibrary passTo() {
         return this.gLibrary;
     }
+
+
 
 }

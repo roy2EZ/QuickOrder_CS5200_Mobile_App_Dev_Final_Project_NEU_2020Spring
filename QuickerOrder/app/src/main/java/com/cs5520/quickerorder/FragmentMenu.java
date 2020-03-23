@@ -38,14 +38,14 @@ import java.util.List;
 import java.util.Map;
 
 
-public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClickListener,
-        GestureOverlayView.OnGesturePerformedListener {
+public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClickListener {
     private static final String TAG = "FragmentMenu";
     private MenuListAdapter adapter;
     private RecyclerView mRecyclerView;
 
 
     private List<Dishes> menu;
+    private Map<Dishes, Integer> order;
 
 
     private PopupWindow mPopWindow;
@@ -84,6 +84,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         menu.add(d2);
         menu.add(d3);
 
+        order = new HashMap<>();
 
     }
 
@@ -91,25 +92,50 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
     @Override
     public void onItemClick(int pos) {
         showPopupWindow(menu.get(pos));
-
     }
 
 
-    private void showPopupWindow(Dishes dish) {
+    private void showPopupWindow(final Dishes dish) {
         //设置contentView
         View contentView = LayoutInflater.from(this.getContext()).inflate(R.layout.popup_menu, null);
 
-        mPopWindow = new PopupWindow(contentView,
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-        mPopWindow.setContentView(contentView);
+        mPopWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+                // = new CustomPopupWindows(contentView,
+              //   ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        // mPopWindow.setContentView(contentView);
         //设置各个控件的点击响应
         Button closeBtn = (Button) contentView.findViewById(R.id.btn_close_pop);
         TextView dishName = (TextView) contentView.findViewById(R.id.dish_name_pop);
         TextView dishPrice = (TextView) contentView.findViewById(R.id.dish_price_pop);
-        GestureOverlayView gOverlay = (GestureOverlayView) contentView.findViewById(R.id.gOverlay);
+        GestureOverlayView gOverlay = contentView.findViewById(R.id.gOverlay);
         dishName.setText(dish.getName());
         dishPrice.setText(String.valueOf(dish.getPrice()));
 
+        gOverlay.addOnGesturePerformedListener(new GestureOverlayView.OnGesturePerformedListener() {
+
+            @Override
+            public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
+
+                ArrayList<Prediction> predictions = gLibrary.recognize(gesture);
+                if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
+                    String action = predictions.get(0).name;
+                    // Toast.makeText(, action, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onGesturePerformed: ");
+                }
+                Log.d(TAG, "onGesturePerformed: Not ");
+
+                if (order.containsKey(dish)) {
+                    order.put(dish, order.get(dish) + 1);
+                } else {
+                    order.put(dish, 1);
+                }
+
+                System.out.println(menu.toString());
+            }
+        });
+
+        
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,30 +143,20 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                 mPopWindow.dismiss();
             }
         });
-        gOverlay.addOnGesturePerformedListener(this);
         //显示PopupWindow
         View rootview = LayoutInflater.from(this.getContext()).inflate(R.layout.activity_main_service
                 , null);
 
 
+
         mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
 
+
     }
-
-    @Override
-    public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
-        ArrayList<Prediction> predictions = gLibrary.recognize(gesture);
-        if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
-            String action = predictions.get(0).name;
-            Toast.makeText(this.getContext(), action, Toast.LENGTH_SHORT).show();
-
-        }
-    }
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.gLibrary = ((MainService) context).passTo();
+        this.gLibrary = ((MainService) getActivity()).passTo();
     }
 }
