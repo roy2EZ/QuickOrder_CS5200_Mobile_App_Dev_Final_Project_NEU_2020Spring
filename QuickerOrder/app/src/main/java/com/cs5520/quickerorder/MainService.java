@@ -66,6 +66,4 @@ public class MainService extends FragmentActivity {
         return this.gLibrary;
     }
 
-
-
 }

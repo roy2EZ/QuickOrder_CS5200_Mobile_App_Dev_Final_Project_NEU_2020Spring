@@ -28,6 +28,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +49,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
     private List<Dishes> menu;
     private Map<Dishes, Integer> order;
 
+    private MainViewModel mViewModel;
 
     private PopupWindow mPopWindow;
     private GestureLibrary gLibrary;
@@ -83,6 +86,9 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         menu.add(d1);
         menu.add(d2);
         menu.add(d3);
+
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
 
         order = new HashMap<>();
 
@@ -125,12 +131,17 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                 }
                 Log.d(TAG, "onGesturePerformed: Not ");
 
+                mViewModel.findDish(dish.getId());
+
+
+
+
                 if (order.containsKey(dish)) {
                     order.put(dish, order.get(dish) + 1);
                 } else {
                     order.put(dish, 1);
                 }
-
+                mViewModel.insertDish(new OrderDish(dish.getId(), 1));
                 System.out.println(menu.toString());
             }
         });

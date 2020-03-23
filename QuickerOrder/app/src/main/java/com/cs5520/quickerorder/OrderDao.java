@@ -14,7 +14,7 @@ public interface OrderDao {
     void insertDish(OrderDish orderDish);
 
     @Query("SELECT * FROM orders WHERE id = :id")
-    List<OrderDish> findDish(int id);
+    OrderDish findDish(int id);
 
     @Query("DELETE FROM orders WHERE id = :id")
     void deleteDish(int id);
