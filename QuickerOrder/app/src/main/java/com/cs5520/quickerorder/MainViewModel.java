@@ -12,7 +12,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
     private OrderRepository repository;
     private LiveData<List<OrderDish>> allDishes;
-    private MutableLiveData<List<OrderDish>> searchResults;
+    private MutableLiveData<OrderDish> searchResults;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -21,7 +21,7 @@ public class MainViewModel extends AndroidViewModel {
         searchResults = repository.getSearchResults();
     }
 
-    public MutableLiveData<List<OrderDish>> getSearchResults() {
+    public MutableLiveData<OrderDish> getSearchResults() {
         return searchResults;
     }
 
@@ -32,7 +32,6 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<OrderDish>> getAllDishes() {
         return allDishes;
     }
-
 
     public void insertDish(OrderDish dish) {
         repository.insertDish(dish);

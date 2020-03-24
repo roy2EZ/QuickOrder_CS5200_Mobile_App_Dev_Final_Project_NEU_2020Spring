@@ -31,6 +31,11 @@ public class OrderRepository {
         task.execute(id);
     }
 
+    public void updateDish(OrderDish dish) {
+        UpdateAsyncTask task = new UpdateAsyncTask(orderDao);
+        task.execute(dish);
+    }
+
     public LiveData<List<OrderDish>> getAllDish() {
         return allDish;
     }
@@ -81,6 +86,20 @@ public class OrderRepository {
         @Override
         protected Void doInBackground(final OrderDish... params) {
             asyncTaskDao.insertDish(params[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateAsyncTask extends AsyncTask<OrderDish, Void, Void> {
+        private OrderDao asyncTaskDao;
+
+        UpdateAsyncTask(OrderDao dao) {
+            asyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final OrderDish... params) {
+            asyncTaskDao.updateDish(params[0]);
             return null;
         }
     }

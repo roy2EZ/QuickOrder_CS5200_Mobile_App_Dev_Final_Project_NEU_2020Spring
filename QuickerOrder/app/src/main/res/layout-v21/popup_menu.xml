@@ -9,10 +9,38 @@
 
 
     <Button
+        android:id="@+id/delete_dish_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginStart="245dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginBottom="16dp"
+        android:text="delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/add_dish_pop"
+        app:layout_constraintTop_toBottomOf="@+id/gOverlay" />
+
+    <Button
+        android:id="@+id/add_dish_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="105dp"
+        android:layout_marginBottom="16dp"
+        android:text="add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gOverlay" />
+
+    <Button
         android:id="@+id/btn_close_pop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.gesture.GestureOverlayView
         android:id="@+id/gOverlay"
