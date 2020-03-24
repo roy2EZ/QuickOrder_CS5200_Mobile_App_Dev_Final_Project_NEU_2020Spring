@@ -95,23 +95,28 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
         order = new HashMap<>();
 
+        observerSetup();
 
 
-        orderRepository.getAllDish().observe(this, new Observer<List<OrderDish>>() {
-            @Override
-            public void onChanged(List<OrderDish> dishes) {
-                for (OrderDish d: dishes) {
-                    order.put(d.getId(), d.getQuantity());
-                }
-            }
-        });
 
 
         // orderDishes.stream().forEach(x -> order.put(x.getId(), x.getQuantity()));
 
     }
-/*
     private void observerSetup() {
+        orderRepository.getAllDish().observe(this, new Observer<List<OrderDish>>() {
+            @Override
+            public void onChanged(List<OrderDish> dishes) {
+                order.clear();
+                for (OrderDish d: dishes) {
+                    order.put(d.getId(), d.getQuantity());
+                }
+            }
+        });
+    }
+
+    /*
+
         mViewModel.getAllWebs().observe(this, new Observer<List<Websites>>() {
             @Override
             public void onChanged(@Nullable final List<Websites> websites) {
@@ -192,6 +197,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                         orderDishes.add(newDish);
                         mViewModel.insertDish(newDish);
                     }
+
                 }
 
 
@@ -209,6 +215,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                     order.put(dish.getId(), 1);
                     orderRepository.insertDish(new OrderDish(dish.getId(), 1));
                 }
+
             }
 
                 /*
@@ -261,7 +268,6 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
 
         mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
-
 
     }
 

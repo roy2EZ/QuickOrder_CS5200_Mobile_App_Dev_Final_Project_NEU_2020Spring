@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +28,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private CheckoutListAdapter adapter;
     private Map<Integer, Integer> order;
     private OrderRepository repository;
+
+    private List<OrderDish> t;
 
 
     @Override
@@ -50,9 +53,6 @@ public class CheckoutActivity extends AppCompatActivity {
     private void observerSetup() {
         mViewModel.getAllDishes().observe(this, new Observer<List<OrderDish>>() {
             @Override public void onChanged(@Nullable final List<OrderDish> dishes) {
-                for (OrderDish d: dishes) {
-                    order.put(d.getId(), d.getQuantity());
-                }
                 adapter.setmDishList(dishes);
             }
         });
@@ -67,6 +67,7 @@ public class CheckoutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        recyclerSetup();
+        observerSetup();
     }
+
 }
