@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class OrderRepository {
-    private MutableLiveData<List<OrderDish>> searchResults = new MutableLiveData<>();
+    private MutableLiveData<OrderDish> searchResults = new MutableLiveData<>();
     private LiveData<List<OrderDish>> allDish;
     private OrderDao orderDao;
 
@@ -31,11 +31,16 @@ public class OrderRepository {
         task.execute(id);
     }
 
+    public void updateDish(OrderDish dish) {
+        UpdateAsyncTask task = new UpdateAsyncTask(orderDao);
+        task.execute(dish);
+    }
+
     public LiveData<List<OrderDish>> getAllDish() {
         return allDish;
     }
 
-    public MutableLiveData<List<OrderDish>> getSearchResults() {
+    public MutableLiveData<OrderDish> getSearchResults() {
         return searchResults;
     }
 
@@ -45,12 +50,11 @@ public class OrderRepository {
         task.execute(id);
     }
 
-
-    private void asyncFinished(List<OrderDish> results) {
+    private void asyncFinished(OrderDish results) {
         searchResults.setValue(results);
     }
 
-    private static class QueryAsyncTask extends AsyncTask<Integer, Void, List<OrderDish>> {
+    private static class QueryAsyncTask extends AsyncTask<Integer, Void, OrderDish> {
         private OrderDao asyncTaskDao;
         private OrderRepository delegate = null;
 
@@ -59,12 +63,12 @@ public class OrderRepository {
         }
 
         @Override
-        protected List<OrderDish> doInBackground(final Integer... params) {
+        protected OrderDish doInBackground(final Integer... params) {
             return asyncTaskDao.findDish(params[0]);
         }
 
         @Override
-        protected void onPostExecute(List<OrderDish> result) {
+        protected void onPostExecute(OrderDish result) {
             delegate.asyncFinished(result);
         }
     }
@@ -82,6 +86,20 @@ public class OrderRepository {
         @Override
         protected Void doInBackground(final OrderDish... params) {
             asyncTaskDao.insertDish(params[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateAsyncTask extends AsyncTask<OrderDish, Void, Void> {
+        private OrderDao asyncTaskDao;
+
+        UpdateAsyncTask(OrderDao dao) {
+            asyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final OrderDish... params) {
+            asyncTaskDao.updateDish(params[0]);
             return null;
         }
     }

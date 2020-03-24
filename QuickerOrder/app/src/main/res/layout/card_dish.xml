@@ -16,17 +16,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textview_quantity_checkout"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textview_quantity_checkout"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -39,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="addDishCheckout"
             android:text="Add" />
 
         <Button
@@ -46,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="removeDishCheckout"
             android:text="Remove" />
     </LinearLayout>
 
