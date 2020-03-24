@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private MainViewModel mViewModel;
     private CheckoutListAdapter adapter;
     private Map<Integer, Integer> order;
+    private OrderRepository repository;
 
 
     @Override
@@ -57,27 +59,14 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void recyclerSetup() {
-        adapter = new CheckoutListAdapter(R.layout.card_dish,
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                },
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-
+        adapter = new CheckoutListAdapter(R.layout.card_dish, mViewModel);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         mRecyclerView.setAdapter(adapter);
     }
 
-    interface BtnListener {
-        void onClick(View v, int id);
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerSetup();
     }
-
 }

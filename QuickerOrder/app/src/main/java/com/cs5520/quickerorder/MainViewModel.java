@@ -21,6 +21,10 @@ public class MainViewModel extends AndroidViewModel {
         searchResults = repository.getSearchResults();
     }
 
+    public void update(OrderDish dish) {
+        repository.updateDish(dish);
+    }
+
     public MutableLiveData<OrderDish> getSearchResults() {
         return searchResults;
     }

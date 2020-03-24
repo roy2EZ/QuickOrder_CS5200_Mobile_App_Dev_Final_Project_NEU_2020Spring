@@ -183,6 +183,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                         if (d.getId() == dish.getId()) {
                             contains = true;
                             d.setQuantity(d.getQuantity() + 1);
+
                         }
                     }
                     Log.d(TAG, "onGesturePerformed: contains ? " + contains);

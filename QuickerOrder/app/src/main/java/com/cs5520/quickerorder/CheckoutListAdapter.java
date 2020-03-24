@@ -19,15 +19,12 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
 
     private Map<Integer, Integer> order;
 
-    private View.OnClickListener deleteListener;
-    private View.OnClickListener addListener;
+    private MainViewModel mViewModel;
 
 
-    public CheckoutListAdapter(int checkoutLayoutId, View.OnClickListener deleteListener,
-                               View.OnClickListener addListener) {
+    public CheckoutListAdapter(int checkoutLayoutId, MainViewModel mViewModel) {
         this.checkoutLayout = checkoutLayoutId;
-        this.addListener = addListener;
-        this.deleteListener = deleteListener;
+        this.mViewModel = mViewModel;
     }
 
 
@@ -35,13 +32,6 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
         this.mDishList = mDishList;
         notifyDataSetChanged();
     }
-
-    /*
-    public interface OnWebClickListener {
-        void onItemClick(int pos);
-    }
-
-     */
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,15 +46,35 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
         // Log.d(TAG, "onBindViewHolder: " + mDishList.get(listPosition).getId());
         holder.dishID.setText(String.valueOf(mDishList.get(listPosition).getId()));
         holder.dishQuantity.setText(String.valueOf(mDishList.get(listPosition).getQuantity()));
-        holder.addCheckout.setOnClickListener(addListener);
-        holder.deleteCheckput.setOnClickListener(deleteListener);
+        holder.deleteCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDishList.get(listPosition).getQuantity() > 1) {
+                    mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() - 1);
+                    mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
+                    notifyDataSetChanged();
+                } else {
+                    mViewModel.deleteDish(mDishList.get(listPosition).getId());
+                    mDishList.remove(listPosition);
+                    notifyDataSetChanged();
+                }
+            }
+        });
+        holder.addCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() + 1);
+                mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
+                notifyDataSetChanged();
+            }
+        });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView dishID;
         TextView dishQuantity;
         Button addCheckout;
-        Button deleteCheckput;
+        Button deleteCheckout;
 
 
         ViewHolder(View itemView) {
@@ -72,7 +82,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             dishID = itemView.findViewById(R.id.dish_id_card);
             dishQuantity = itemView.findViewById(R.id.textview_quantity_checkout);
             addCheckout = itemView.findViewById(R.id.cart_dish_add);
-            deleteCheckput = itemView.findViewById(R.id.cart_dish_remove);
+            deleteCheckout = itemView.findViewById(R.id.cart_dish_remove);
 
 /*
             addCheckout.setOnClickListener(new View.OnClickListener() {
@@ -99,4 +109,17 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
     public int getItemCount() {
         return this.mDishList == null ? 0: mDishList.size();
     }
+/*
+    public void addDishCheckout(View view) {
+        Log.d(TAG, "addDishCheckout: ");
+    }
+
+    public void removeDishCheckout(View view) {
+        Log.d(TAG, "removeDishCheckout: ");
+
+    }
+
+ */
+
+
 }
