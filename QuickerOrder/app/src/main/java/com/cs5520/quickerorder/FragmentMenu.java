@@ -28,6 +28,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,14 +45,18 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
     private MenuListAdapter adapter;
     private RecyclerView mRecyclerView;
 
+    private OrderRepository orderRepository;
+
 
     private List<Dishes> menu;
-    private Map<Dishes, Integer> order;
 
+    private  List<OrderDish> orderDishes;
+    private Map<Integer, Integer> order;
+
+    private MainViewModel mViewModel;
 
     private PopupWindow mPopWindow;
     private GestureLibrary gLibrary;
-
 
     @Nullable
     @Override
@@ -84,9 +90,51 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         menu.add(d2);
         menu.add(d3);
 
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+
         order = new HashMap<>();
 
+        observerSetup();
+
+
+
+
+        // orderDishes.stream().forEach(x -> order.put(x.getId(), x.getQuantity()));
+
     }
+    private void observerSetup() {
+        orderRepository.getAllDish().observe(this, new Observer<List<OrderDish>>() {
+            @Override
+            public void onChanged(List<OrderDish> dishes) {
+                order.clear();
+                for (OrderDish d: dishes) {
+                    order.put(d.getId(), d.getQuantity());
+                }
+            }
+        });
+    }
+
+    /*
+
+        mViewModel.getAllWebs().observe(this, new Observer<List<Websites>>() {
+            @Override
+            public void onChanged(@Nullable final List<Websites> websites) {
+                if(mWebList.size() > 0){
+                    mWebList.clear();
+                }
+                if(websites != null){
+                    mWebList.addAll(websites);
+                }
+                adapter.notifyDataSetChanged();
+
+                adapter.setmWebItem(websites);
+            }
+        });
+    }
+
+ */
+
 
 
     @Override
@@ -109,33 +157,103 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         TextView dishName = (TextView) contentView.findViewById(R.id.dish_name_pop);
         TextView dishPrice = (TextView) contentView.findViewById(R.id.dish_price_pop);
         GestureOverlayView gOverlay = contentView.findViewById(R.id.gOverlay);
+
+        Button addDish = (Button) contentView.findViewById(R.id.add_dish_pop);
+        Button deleteDish = (Button) contentView.findViewById(R.id.delete_dish_pop);
+
+
         dishName.setText(dish.getName());
         dishPrice.setText(String.valueOf(dish.getPrice()));
 
-        gOverlay.addOnGesturePerformedListener(new GestureOverlayView.OnGesturePerformedListener() {
 
+        gOverlay.addOnGesturePerformedListener(new GestureOverlayView.OnGesturePerformedListener() {
             @Override
             public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
 
                 ArrayList<Prediction> predictions = gLibrary.recognize(gesture);
                 if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
-                    String action = predictions.get(0).name;
-                    // Toast.makeText(, action, Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onGesturePerformed: ");
-                }
-                Log.d(TAG, "onGesturePerformed: Not ");
-
-                if (order.containsKey(dish)) {
-                    order.put(dish, order.get(dish) + 1);
+                    Log.d(TAG, "onGesturePerformed: add a dish");
+                    boolean contains = false;
+                    for(OrderDish d : orderDishes) {
+                        if (d.getId() == dish.getId()) {
+                            contains = true;
+                            d.setQuantity(d.getQuantity() + 1);
+                        }
+                    }
+                    if (contains) mViewModel.insertDish(new OrderDish(dish.getId(), 1));
                 } else {
-                    order.put(dish, 1);
+                    Log.d(TAG, "onGesturePerformed: Not ");
+                    boolean contains = false;
+                    for(OrderDish d : orderDishes) {
+                        if (d.getId() == dish.getId()) {
+                            contains = true;
+                            d.setQuantity(d.getQuantity() + 1);
+
+                        }
+                    }
+                    Log.d(TAG, "onGesturePerformed: contains ? " + contains);
+                    if (!contains) {
+                        OrderDish newDish = new OrderDish(dish.getId(), 1);
+                        orderDishes.add(newDish);
+                        mViewModel.insertDish(newDish);
+                    }
+
                 }
 
-                System.out.println(menu.toString());
+
             }
         });
 
-        
+        addDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: add");
+                if (order.containsKey(dish.getId())) {
+                    order.put(dish.getId(), order.get(dish.getId()) + 1);
+                    orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
+                } else {
+                    order.put(dish.getId(), 1);
+                    orderRepository.insertDish(new OrderDish(dish.getId(), 1));
+                }
+
+            }
+
+                /*
+                boolean contains = false;
+                for(OrderDish d : orderDishes) {
+                    if (d.getId() == dish.getId()) {
+                        contains = true;
+                        d.setQuantity(d.getQuantity() + 1);
+                    }
+                }
+                Log.d(TAG, "onGesturePerformed: contains ? " + contains);
+                if (!contains) {
+                    OrderDish newDish = new OrderDish(dish.getId(), 1);
+                    orderDishes.add(newDish);
+                    orderRepository.insertDish(newDish);
+                }
+            }
+
+                 */
+        });
+
+        deleteDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("delete");
+                if (order.containsKey(dish.getId())) {
+                    if (order.get(dish.getId()) > 1) {
+                        order.put(dish.getId(), order.get(dish.getId()) - 1);
+                        orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
+                    } else {
+                        order.remove(dish.getId());
+                        orderRepository.deleteDish(dish.getId());
+                    }
+                } else {
+                    Toast.makeText(getContext(), "No such item in cart!", (int)10).show();
+                }
+            }
+        });
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,12 +269,12 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
         mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
 
-
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.gLibrary = ((MainService) getActivity()).passTo();
+        this.orderRepository = ((MainService) getActivity()).passRepository();
     }
 }

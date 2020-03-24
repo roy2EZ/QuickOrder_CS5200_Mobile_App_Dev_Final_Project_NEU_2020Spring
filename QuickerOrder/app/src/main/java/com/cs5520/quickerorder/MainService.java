@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainService extends FragmentActivity {
-    // private List<Dishes> menu;
+    private OrderRepository repository;
 
     private GestureLibrary gLibrary;
 
@@ -48,6 +48,8 @@ public class MainService extends FragmentActivity {
 
         order = new HashMap<>();
 
+        this.repository = new OrderRepository(getApplication());
+
 
         gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
         if (!gLibrary.load()) {
@@ -66,6 +68,8 @@ public class MainService extends FragmentActivity {
         return this.gLibrary;
     }
 
-
+    public OrderRepository passRepository() {
+        return this.repository;
+    }
 
 }

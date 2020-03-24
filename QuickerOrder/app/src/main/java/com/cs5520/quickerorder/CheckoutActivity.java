@@ -7,11 +7,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
     private List<OrderDish> mOrder;
@@ -21,11 +26,12 @@ public class CheckoutActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private MainViewModel mViewModel;
     private CheckoutListAdapter adapter;
+    private Map<Integer, Integer> order;
+    private OrderRepository repository;
+
+    private List<OrderDish> t;
 
 
-
-    private EditText inputName;
-    private EditText inputUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +41,8 @@ public class CheckoutActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         // mLayoutManager = new LinearLayoutManager(this);
 
-        this.mOrder = new LinkedList<>();
-
+        order = new HashMap<>();
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-
 
         observerSetup();
         recyclerSetup();
@@ -52,56 +56,18 @@ public class CheckoutActivity extends AppCompatActivity {
                 adapter.setmDishList(dishes);
             }
         });
-/*
-        mViewModel.getSearchResults().observe(this, new Observer<List<Product>>() {
-            @Override public void onChanged(@Nullable final List<Product> products) {
-                if (products.size() > 0) {
-                    productId.setText(String.format(Locale.US, "%d", products.get(0).getId()));
-                    productName.setText(products.get(0).getName());
-                    productQuantity.setText(String.format(Locale.US, "%d", products.get(0).getQuantity()));
-                } else {
-                    productId.setText("No Match");
-                }
-            }
-        });
-
- */
     }
 
-
-
     private void recyclerSetup() {
-        // RecyclerView recyclerView;
-        adapter = new CheckoutListAdapter(R.layout.card_dish);
-        // recyclerView = getView().findViewById(R.id.product_recycler);
+        adapter = new CheckoutListAdapter(R.layout.card_dish, mViewModel);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         mRecyclerView.setAdapter(adapter);
     }
 
-/*
-
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper
-            .SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            Log.d(TAG, "adapter pos: " + viewHolder.getAdapterPosition());
-            mViewModel.deleteWebsite(adapter.psoIDtoItemId(viewHolder.getAdapterPosition()));
-            adapter.notifyDataSetChanged();
-        }
-    };
-
     @Override
-    public void onItemClick(int pos) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWebList.get(pos).getWeb_url()));
-        Log.d(TAG, "onItemClick: " + intent.toString());
-        startActivity(intent);
+    protected void onResume() {
+        super.onResume();
+        observerSetup();
     }
 
-
- */
 }

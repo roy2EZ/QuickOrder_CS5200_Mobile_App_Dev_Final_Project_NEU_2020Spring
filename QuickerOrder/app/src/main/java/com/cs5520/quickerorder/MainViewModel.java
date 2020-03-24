@@ -5,25 +5,37 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
     private OrderRepository repository;
     private LiveData<List<OrderDish>> allDishes;
-    // private MutableLiveData<List<Websites>> searchResults;
+    private MutableLiveData<OrderDish> searchResults;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         repository = new OrderRepository(application);
         allDishes = repository.getAllDish();
-        // searchResults = repository.getSearchResults();
+        searchResults = repository.getSearchResults();
+    }
+
+    public void update(OrderDish dish) {
+        repository.updateDish(dish);
+    }
+
+    public MutableLiveData<OrderDish> getSearchResults() {
+        return searchResults;
+    }
+
+    public void findDish(int id) {
+        repository.findDish(id);
     }
 
     public LiveData<List<OrderDish>> getAllDishes() {
         return allDishes;
     }
-
 
     public void insertDish(OrderDish dish) {
         repository.insertDish(dish);
