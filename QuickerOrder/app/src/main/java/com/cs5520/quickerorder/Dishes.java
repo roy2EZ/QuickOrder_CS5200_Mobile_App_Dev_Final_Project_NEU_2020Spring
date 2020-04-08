@@ -1,5 +1,6 @@
 package com.cs5520.quickerorder;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Dishes extends Item {
     private int id;
     private String name;
-    private String pic;
+    private @DrawableRes int pic;
     private double price;
 
     public double getPrice() {
@@ -19,7 +20,7 @@ public class Dishes extends Item {
         this.price = price;
     }
 
-    public Dishes(int id, String name, String pic, double price) {
+    public Dishes(int id, String name, @DrawableRes int pic, double price) {
         this.id = id;
         this.name = name;
         this.pic = pic;
@@ -43,11 +44,11 @@ public class Dishes extends Item {
         this.name = name;
     }
 
-    public String getPic() {
+    public int getPic() {
         return pic;
     }
 
-    public void setPic(String pic) {
+    public void setPic(@DrawableRes int pic) {
         this.pic = pic;
     }
 }
