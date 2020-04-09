@@ -1,26 +1,18 @@
 package com.cs5520.quickerorder;
 
-import android.app.Activity;
 import android.content.Context;
 import android.gesture.Gesture;
-import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
 import android.gesture.Prediction;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,12 +75,27 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         // add dish into our menu
         // TODO: put it into main service
         menu = new LinkedList<>();
-        Dishes d1 = new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0);
-        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5);
-        Dishes d3 = new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99);
+        Dishes d1 = new Dishes(1, "Shredded Potato", R.drawable.shredded_potato, 7.99);
+        Dishes d2 = new Dishes(2, "Crispy Chicken with Bone", R.drawable.crispy_chichen_with_bone, 14.99);
+        Dishes d3 = new Dishes(3, "Fried Pork in Scoop", R.drawable.fried_pork_in_scoop, 17.99);
+        Dishes d4 = new Dishes(4, "Pork Belly with Sauerkraut", R.drawable.pork_belly_with_sauerkraut, 15.99);
+        Dishes d5 = new Dishes(5, "Potato and Bean with Rib", R.drawable.potato_and_bean_with_pork_rib, 14.99);
+        Dishes d6 = new Dishes(6, "Rib with Vermincelli", R.drawable.rib_with_vermincelli, 15.99);
+        Dishes d7 = new Dishes(7, "Stewed Chicken with Mushroom", R.drawable.stewed_chicken_with_mushroom, 16.99);
+        Dishes d8 = new Dishes(8, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99);
+        Dishes d9 = new Dishes(9, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99);
+        Dishes d10 = new Dishes(10, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99);
+
         menu.add(d1);
         menu.add(d2);
         menu.add(d3);
+        menu.add(d4);
+        menu.add(d5);
+        menu.add(d6);
+        menu.add(d7);
+        menu.add(d8);
+        menu.add(d9);
+        menu.add(d10);
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
