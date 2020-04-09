@@ -39,7 +39,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private SensorManager sm;
     private Sensor ligthSensor;
     private StringBuffer sb;
-    private TextView tvValue;
+    private MySensorListener mySensorListener;
+    private float mlux;
 
 
     private List<OrderDish> t;
@@ -63,12 +64,14 @@ public class CheckoutActivity extends AppCompatActivity {
 
         sb = new StringBuffer();
 
+        mlux = 6000;
+
         //获取SensorManager对象
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         //获取Sensor对象
         ligthSensor = sm.getDefaultSensor(Sensor.TYPE_LIGHT);
-
-        sm.registerListener(new MySensorListener(), ligthSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mySensorListener = new MySensorListener();
+        sm.registerListener(mySensorListener, ligthSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
 
@@ -91,6 +94,7 @@ public class CheckoutActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         observerSetup();
+        sm.registerListener(mySensorListener, ligthSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     private void checkout() {
@@ -98,7 +102,7 @@ public class CheckoutActivity extends AppCompatActivity {
         for (OrderDish o: orderDishes) {
             mViewModel.deleteDish(o.getId());
         }
-        Toast.makeText(getApplicationContext(), "Checked out!", (int) 10).show();
+        Toast.makeText(getApplicationContext(), "Checked out!", (int) 1).show();
     }
 
     public class MySensorListener implements SensorEventListener {
@@ -113,14 +117,31 @@ public class CheckoutActivity extends AppCompatActivity {
             //获取光线强度
             float lux = event.values[0];
 
-            sb.append("acc ----> " + acc);
-            sb.append("\n");
-            sb.append("lux ----> " + lux);
-            sb.append("\n");
+            if (lux < 50 && mlux > 50) checkout();
 
-            if (lux < 5000) checkout();
+            mlux = lux;
         }
 
     }
+
+
+    @Override
+    protected void onPause() {
+        sm.unregisterListener(mySensorListener,ligthSensor);
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        sm.unregisterListener(mySensorListener,ligthSensor);
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        sm.registerListener(mySensorListener, ligthSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        super.onRestart();
+    }
+
 
 }
