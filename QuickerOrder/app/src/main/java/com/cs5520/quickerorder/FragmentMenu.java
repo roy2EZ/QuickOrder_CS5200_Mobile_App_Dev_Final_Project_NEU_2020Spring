@@ -83,9 +83,9 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         // add dish into our menu
         // TODO: put it into main service
         menu = new LinkedList<>();
-        Dishes d1 = new Dishes(1, "Big Mac", "pic1", 10.0);
-        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", "pic2", 5.5);
-        Dishes d3 = new Dishes(3, "Fillet Fish", "pic3", 9.99);
+        Dishes d1 = new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0);
+        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5);
+        Dishes d3 = new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99);
         menu.add(d1);
         menu.add(d2);
         menu.add(d3);
