@@ -9,9 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -28,6 +34,13 @@ public class CheckoutActivity extends AppCompatActivity {
     private CheckoutListAdapter adapter;
     private Map<Integer, Integer> order;
     private OrderRepository repository;
+
+
+    private SensorManager sm;
+    private Sensor ligthSensor;
+    private StringBuffer sb;
+    private TextView tvValue;
+
 
     private List<OrderDish> t;
 
@@ -46,6 +59,16 @@ public class CheckoutActivity extends AppCompatActivity {
 
         observerSetup();
         recyclerSetup();
+
+
+        sb = new StringBuffer();
+
+        //获取SensorManager对象
+        sm = (SensorManager) getSystemService(SENSOR_SERVICE);
+        //获取Sensor对象
+        ligthSensor = sm.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+        sm.registerListener(new MySensorListener(), ligthSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
 
@@ -68,6 +91,36 @@ public class CheckoutActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         observerSetup();
+    }
+
+    private void checkout() {
+        List<OrderDish> orderDishes = mViewModel.getAllDishes().getValue();
+        for (OrderDish o: orderDishes) {
+            mViewModel.deleteDish(o.getId());
+        }
+        Toast.makeText(getApplicationContext(), "Checked out!", (int) 10).show();
+    }
+
+    public class MySensorListener implements SensorEventListener {
+
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+
+        public void onSensorChanged(SensorEvent event) {
+            //获取精度
+            float acc = event.accuracy;
+            //获取光线强度
+            float lux = event.values[0];
+
+            sb.append("acc ----> " + acc);
+            sb.append("\n");
+            sb.append("lux ----> " + lux);
+            sb.append("\n");
+
+            if (lux < 5000) checkout();
+        }
+
     }
 
 }
