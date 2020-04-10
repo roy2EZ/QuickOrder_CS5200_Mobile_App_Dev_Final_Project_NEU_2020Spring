@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity  {
         menu.put(5, new Dishes(5, "Crispy Chicken with Bone", R.drawable.crispy_chichen_with_bone, 14.99));
         menu.put(6, new Dishes(6, "Fried Pork in Scoop", R.drawable.fried_pork_in_scoop, 17.99));
         menu.put(7, new Dishes(7, "Pork Belly with Sauerkraut", R.drawable.pork_belly_with_sauerkraut, 15.99));
-        menu.put(8,  new Dishes(8, "Potato and Bean with Rib", R.drawable.potato_and_bean_with_pork_rib, 14.99));
+        menu.put(8, new Dishes(8, "Potato and Bean with Rib", R.drawable.potato_and_bean_with_pork_rib, 14.99));
         menu.put(9, new Dishes(9, "Rib with Vermincelli", R.drawable.rib_with_vermincelli, 15.99));
         menu.put(10, new Dishes(10, "Stewed Chicken with Mushroom", R.drawable.stewed_chicken_with_mushroom, 16.99));
-        menu.put(11, new Dishes(11, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
-        menu.put(12, new Dishes(12, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99));
-        menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99));
-        menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99));
-        menu.put(15,  new Dishes(15, "Yangcheng Lake Crab", R.drawable.yangchenghu_crab, 30.99));
+        //menu.put(11, new Dishes(11, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
+        //menu.put(12, new Dishes(12, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99));
+        //menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99));
+        //menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99));
+        //menu.put(15,  new Dishes(15, "Yangcheng Lake Crab", R.drawable.yangchenghu_crab, 30.99));
     }
 
 
