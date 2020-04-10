@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity  {
         menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99));
         menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99));
         menu.put(15,  new Dishes(15, "Yangcheng Lake Crab", R.drawable.yangchenghu_crab, 30.99));
+         
     }
 
 
@@ -85,12 +86,12 @@ public class MainActivity extends AppCompatActivity  {
                             entry.getValue().longitude,
                             Constants.GEOFENCE_RADIUS_IN_METERS
                     )
-                    .setExpirationDuration(Constants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
-                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                   .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                             Geofence.GEOFENCE_TRANSITION_EXIT)
                     .build());
         }
     }
+     .setExpirationDuration(Constants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
