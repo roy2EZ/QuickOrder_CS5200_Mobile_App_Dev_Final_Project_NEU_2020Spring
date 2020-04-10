@@ -51,7 +51,7 @@ public class MainService extends FragmentActivity {
         this.repository = new OrderRepository(getApplication());
 
 
-        gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        gLibrary = GestureLibraries.fromRawResource(this, R.raw.gesture);
         if (!gLibrary.load()) {
             finish();
         }

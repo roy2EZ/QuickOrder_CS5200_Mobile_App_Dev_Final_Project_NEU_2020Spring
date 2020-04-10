@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.cs5520.quickerorder.ui.main.SectionsPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +36,16 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(i);
     }
 
-    public void gotoMainCheckout(View view) {
+    static HashMap<Integer, Dishes> menu;
 
-        Intent i = new Intent(this, CheckoutActivity.class);
-        startActivity(i);
+    static {
+        menu = new HashMap<>();
+        menu.put(1, new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0));
+        menu.put(2, new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5));
+        menu.put(3, new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99));
     }
+
+
     /*
         if (!mGoogleApiClient.isConnected()) {
             Toast.makeText(this, "Google API Client not connected!", Toast.LENGTH_SHORT).show();
