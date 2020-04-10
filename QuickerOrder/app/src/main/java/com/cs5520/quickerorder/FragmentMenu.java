@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,10 @@ import java.util.Map;
 
 public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClickListener {
     private static final String TAG = "FragmentMenu";
+    private static final String ADDDISH = "Added!";
+    private static final String DELETEDISH = "Deleted!";
+    private static final String NOITEM ="No such item in cart!";
+    private static final String NOTRECOGNIZE ="Gesture is not recognized!";
     private MenuListAdapter adapter;
     private RecyclerView mRecyclerView;
 
@@ -74,6 +80,12 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
         // add dish into our menu
         // TODO: put it into main service
+
+        menu = new ArrayList<>(MainActivity.menu.values());
+        /*
+        Dishes d1 = new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0);
+        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5);
+        Dishes d3 = new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99);
         menu = new LinkedList<>();
         Dishes d1 = new Dishes(1, "Shredded Potato", R.drawable.shredded_potato, 7.99);
         Dishes d2 = new Dishes(2, "Crispy Chicken with Bone", R.drawable.crispy_chichen_with_bone, 14.99);
@@ -96,6 +108,8 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         menu.add(d8);
         menu.add(d9);
         menu.add(d10);
+
+         */
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
@@ -146,6 +160,8 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
     @Override
     public void onItemClick(int pos) {
+        Log.d(TAG, "onItemClick: pos" + pos);
+        Log.d(TAG, "onItemClick: " + menu.get(pos).toString());
         showPopupWindow(menu.get(pos));
     }
 
@@ -165,63 +181,43 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         TextView dishPrice = (TextView) contentView.findViewById(R.id.dish_price_pop);
         GestureOverlayView gOverlay = contentView.findViewById(R.id.gOverlay);
 
-        Button addDish = (Button) contentView.findViewById(R.id.add_dish_pop);
-        Button deleteDish = (Button) contentView.findViewById(R.id.delete_dish_pop);
+        final Button addDish = (Button) contentView.findViewById(R.id.add_dish_pop);
+        final Button deleteDish = (Button) contentView.findViewById(R.id.delete_dish_pop);
+        ImageView dishImage = (ImageView) contentView.findViewById(R.id.dish_image_pop);
 
 
         dishName.setText(dish.getName());
         dishPrice.setText(String.valueOf(dish.getPrice()));
+        Log.d(TAG, "showPopupWindow: " + dish.getPic());
+        dishImage.setImageResource(dish.getPic());
 
 
         gOverlay.addOnGesturePerformedListener(new GestureOverlayView.OnGesturePerformedListener() {
             @Override
             public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
 
+
                 ArrayList<Prediction> predictions = gLibrary.recognize(gesture);
-                if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
-                    Log.d(TAG, "onGesturePerformed: add a dish");
-                    boolean contains = false;
-                    for(OrderDish d : orderDishes) {
-                        if (d.getId() == dish.getId()) {
-                            contains = true;
-                            d.setQuantity(d.getQuantity() + 1);
-                        }
+
+
+                if (predictions.size() > 0 && predictions.get(0).score > 4) {
+                    if (predictions.get(0).name.startsWith("circle")) {
+                        addDish(dish);
+                    } else if (predictions.get(0).name.startsWith("x")) {
+                        deleteDish(dish);
                     }
-                    if (contains) mViewModel.insertDish(new OrderDish(dish.getId(), 1));
                 } else {
-                    Log.d(TAG, "onGesturePerformed: Not ");
-                    boolean contains = false;
-                    for(OrderDish d : orderDishes) {
-                        if (d.getId() == dish.getId()) {
-                            contains = true;
-                            d.setQuantity(d.getQuantity() + 1);
-
-                        }
-                    }
-                    Log.d(TAG, "onGesturePerformed: contains ? " + contains);
-                    if (!contains) {
-                        OrderDish newDish = new OrderDish(dish.getId(), 1);
-                        orderDishes.add(newDish);
-                        mViewModel.insertDish(newDish);
-                    }
-
+                    Toast.makeText(getContext(), NOTRECOGNIZE, NOTRECOGNIZE.length()).show();
                 }
-
-
             }
         });
+
 
         addDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: add");
-                if (order.containsKey(dish.getId())) {
-                    order.put(dish.getId(), order.get(dish.getId()) + 1);
-                    orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
-                } else {
-                    order.put(dish.getId(), 1);
-                    orderRepository.insertDish(new OrderDish(dish.getId(), 1));
-                }
+
+                addDish(dish);
 
             }
 
@@ -247,18 +243,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         deleteDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("delete");
-                if (order.containsKey(dish.getId())) {
-                    if (order.get(dish.getId()) > 1) {
-                        order.put(dish.getId(), order.get(dish.getId()) - 1);
-                        orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
-                    } else {
-                        order.remove(dish.getId());
-                        orderRepository.deleteDish(dish.getId());
-                    }
-                } else {
-                    Toast.makeText(getContext(), "No such item in cart!", (int)10).show();
-                }
+                deleteDish(dish);
             }
         });
 
@@ -276,6 +261,32 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
         mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
 
+    }
+
+    private void addDish(Dishes dish) {
+        if (order.containsKey(dish.getId())) {
+            order.put(dish.getId(), order.get(dish.getId()) + 1);
+            orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
+        } else {
+            order.put(dish.getId(), 1);
+            orderRepository.insertDish(new OrderDish(dish.getId(), 1));
+        }
+        Toast.makeText(getContext(), ADDDISH, ADDDISH.length()).show();
+    }
+
+    private void deleteDish(Dishes dish) {
+        if (order.containsKey(dish.getId())) {
+            if (order.get(dish.getId()) > 1) {
+                order.put(dish.getId(), order.get(dish.getId()) - 1);
+                orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
+            } else {
+                order.remove(dish.getId());
+                orderRepository.deleteDish(dish.getId());
+            }
+            Toast.makeText(getContext(), DELETEDISH, DELETEDISH.length()).show();
+        } else {
+            Toast.makeText(getContext(), NOITEM, NOITEM.length()).show();
+        }
     }
 
     @Override

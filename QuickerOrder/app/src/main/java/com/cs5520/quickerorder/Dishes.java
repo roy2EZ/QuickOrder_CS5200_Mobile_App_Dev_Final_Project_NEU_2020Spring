@@ -24,6 +24,15 @@ public class Dishes extends Item {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "Dishes{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", pic=" + pic +
+                ", price=" + price +
+                '}';
+    }
 
     public int getId() {
         return id;

@@ -44,7 +44,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int listPosition) {
         // Log.d(TAG, "onBindViewHolder: " + mDishList.get(listPosition).getId());
-        holder.dishID.setText(String.valueOf(mDishList.get(listPosition).getId()));
+        holder.dishID.setText(String.valueOf(MainActivity.menu.get(mDishList.get(listPosition).getId()).getName()));
         holder.dishQuantity.setText(String.valueOf(mDishList.get(listPosition).getQuantity()));
         holder.deleteCheckout.setOnClickListener(new View.OnClickListener() {
             @Override

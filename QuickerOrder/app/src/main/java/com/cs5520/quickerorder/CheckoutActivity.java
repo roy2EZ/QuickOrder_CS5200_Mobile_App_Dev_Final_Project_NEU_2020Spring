@@ -14,6 +14,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,8 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
-    private List<OrderDish> mOrder;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -42,10 +41,6 @@ public class CheckoutActivity extends AppCompatActivity {
     private MySensorListener mySensorListener;
     private float mlux;
 
-
-    private List<OrderDish> t;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +55,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
         observerSetup();
         recyclerSetup();
-
-
-        sb = new StringBuffer();
 
         mlux = 6000;
 
@@ -98,11 +90,13 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void checkout() {
-        List<OrderDish> orderDishes = mViewModel.getAllDishes().getValue();
-        for (OrderDish o: orderDishes) {
-            mViewModel.deleteDish(o.getId());
+        List<OrderDish> mOrder = mViewModel.getAllDishes().getValue();
+        if (mOrder != null && !mOrder.isEmpty()) {
+            for (OrderDish o : mOrder) {
+                mViewModel.deleteDish(o.getId());
+            }
+            Toast.makeText(getApplicationContext(), "Checked out!", (int) 1).show();
         }
-        Toast.makeText(getApplicationContext(), "Checked out!", (int) 1).show();
     }
 
     public class MySensorListener implements SensorEventListener {
@@ -135,12 +129,6 @@ public class CheckoutActivity extends AppCompatActivity {
     protected void onStop() {
         sm.unregisterListener(mySensorListener,ligthSensor);
         super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-        sm.registerListener(mySensorListener, ligthSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        super.onRestart();
     }
 
 
