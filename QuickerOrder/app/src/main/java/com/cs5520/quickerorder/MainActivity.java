@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity  {
         menu.put(8, new Dishes(8, "Potato and Bean with Rib", R.drawable.potato_and_bean_with_pork_rib, 14.99));
         menu.put(9, new Dishes(9, "Rib with Vermincelli", R.drawable.rib_with_vermincelli, 15.99));
         menu.put(10, new Dishes(10, "Stewed Chicken with Mushroom", R.drawable.stewed_chicken_with_mushroom, 16.99));
-        menu.put(11, new Dishes(11, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
+        //menu.put(11, new Dishes(11, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
         //menu.put(12, new Dishes(12, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99));
         //menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99));
         //menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99));
