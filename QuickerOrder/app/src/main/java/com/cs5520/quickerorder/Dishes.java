@@ -1,15 +1,12 @@
 package com.cs5520.quickerorder;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 public class Dishes extends Item {
     private int id;
     private String name;
     private @DrawableRes int pic;
+
     private double price;
 
     public double getPrice() {
