@@ -13,11 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-<<<<<<< HEAD
 import android.widget.ImageButton;
 import android.widget.ImageView;
-=======
->>>>>>> d3bef7c489c78126eaef787e143d5055297edcaa
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,13 +80,12 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
         // add dish into our menu
         // TODO: put it into main service
-<<<<<<< HEAD
+
         menu = new ArrayList<>(MainActivity.menu.values());
         /*
         Dishes d1 = new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0);
         Dishes d2 = new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5);
         Dishes d3 = new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99);
-=======
         menu = new LinkedList<>();
         Dishes d1 = new Dishes(1, "Shredded Potato", R.drawable.shredded_potato, 7.99);
         Dishes d2 = new Dishes(2, "Crispy Chicken with Bone", R.drawable.crispy_chichen_with_bone, 14.99);
@@ -102,7 +98,6 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         Dishes d9 = new Dishes(9, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99);
         Dishes d10 = new Dishes(10, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99);
 
->>>>>>> d3bef7c489c78126eaef787e143d5055297edcaa
         menu.add(d1);
         menu.add(d2);
         menu.add(d3);

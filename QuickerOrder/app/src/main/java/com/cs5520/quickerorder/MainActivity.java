@@ -40,9 +40,16 @@ public class MainActivity extends AppCompatActivity  {
 
     static {
         menu = new HashMap<>();
-        menu.put(1, new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0));
-        menu.put(2, new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5));
-        menu.put(3, new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99));
+        menu.put(1, new Dishes(1, "Shredded Potato", R.drawable.shredded_potato, 7.99));
+        menu.put(2, new Dishes(2, "Crispy Chicken with Bone", R.drawable.crispy_chichen_with_bone, 14.99));
+        menu.put(3, new Dishes(3, "Fried Pork in Scoop", R.drawable.fried_pork_in_scoop, 17.99));
+        menu.put(4, new Dishes(4, "Pork Belly with Sauerkraut", R.drawable.pork_belly_with_sauerkraut, 15.99));
+        menu.put(5,  new Dishes(5, "Potato and Bean with Rib", R.drawable.potato_and_bean_with_pork_rib, 14.99));
+        menu.put(6, new Dishes(6, "Rib with Vermincelli", R.drawable.rib_with_vermincelli, 15.99));
+        menu.put(7, new Dishes(7, "Stewed Chicken with Mushroom", R.drawable.stewed_chicken_with_mushroom, 16.99));
+        menu.put(8, new Dishes(8, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
+        menu.put(9, new Dishes(9, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99));
+        menu.put(10, new Dishes(10, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99));
     }
 
 
