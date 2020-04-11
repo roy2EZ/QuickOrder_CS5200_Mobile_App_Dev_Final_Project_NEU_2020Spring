@@ -24,12 +24,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.full_menu, R.string.recommendation, R.string.call_service};
+    private static final int[] TAB_TITLES = new int[]{R.string.full_menu, R.string.special, R.string.call_service};
     private static final String TAG = "SectionsPagerAdapter";
     private final Context mContext;
     private Fragment fullmenu;
-    private Fragment recommandation;
-    private  Fragment callservice;
+    private Fragment special;
+    private Fragment callservice;
 
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -37,7 +37,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
 
         fullmenu = new FragmentMenu();
-        recommandation = new FragmentMenu();
+        special = new FragmentMenu();
         callservice = new FragmentCallService();
 
     }
@@ -60,7 +60,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return fullmenu;
             case 1:
-                return recommandation;
+                return special;
             case 2:
                 return callservice;
             default:

@@ -14,7 +14,7 @@
     <string name="full_menu">Full Menu</string>
 
     <string name="call_service">Call Service</string>
-    <string name="recommendation">Recommendation</string>
+    <string name="special">Special</string>
 
 
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
@@ -35,4 +35,6 @@
     <string name="remove">Remove</string>
     <string name="splash" />
     <string name="a_delicious_dish">A delicious dish.</string>
+    <string name="draw_a_circle_to_add">Draw a circle to add.</string>
+    <string name="draw_a_cross_to_remove">Draw a cross to remove.</string>
 </resources>
