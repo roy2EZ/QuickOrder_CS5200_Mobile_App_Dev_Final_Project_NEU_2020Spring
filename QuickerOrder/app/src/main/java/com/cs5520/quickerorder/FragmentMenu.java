@@ -1,10 +1,13 @@
 package com.cs5520.quickerorder;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.gesture.Gesture;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
 import android.gesture.Prediction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -66,14 +69,19 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         mRecyclerView = view.findViewById(R.id.recycle_menu);
         mRecyclerView.setHasFixedSize(true);
 
-        adapter = new MenuListAdapter(R.layout.card_dish_menu, this, menu);
+        adapter = new MenuListAdapter(this.getContext(), R.layout.card_dish_menu, this, menu);
 
         // recyclerView = getView().findViewById(R.id.product_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mRecyclerView.setAdapter(adapter);
-
+        mRecyclerView.setItemViewCacheSize(10);
+        mRecyclerView.setDrawingCacheEnabled(true);
+        mRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         return view;
     }
+
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
