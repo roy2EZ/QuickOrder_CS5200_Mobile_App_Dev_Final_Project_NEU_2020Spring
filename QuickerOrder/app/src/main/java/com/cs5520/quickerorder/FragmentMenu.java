@@ -30,6 +30,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -184,13 +186,13 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
               //   ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         // mPopWindow.setContentView(contentView);
         //设置各个控件的点击响应
-        Button closeBtn = (Button) contentView.findViewById(R.id.btn_close_pop);
+        FloatingActionButton closeBtn = (FloatingActionButton) contentView.findViewById(R.id.btn_close_pop);
         TextView dishName = (TextView) contentView.findViewById(R.id.dish_name_pop);
         TextView dishPrice = (TextView) contentView.findViewById(R.id.dish_price_pop);
         GestureOverlayView gOverlay = contentView.findViewById(R.id.gOverlay);
 
         final Button addDish = (Button) contentView.findViewById(R.id.add_dish_pop);
-        final Button deleteDish = (Button) contentView.findViewById(R.id.delete_dish_pop);
+//        final Button deleteDish = (Button) contentView.findViewById(R.id.delete_dish_pop);
         ImageView dishImage = (ImageView) contentView.findViewById(R.id.dish_image_pop);
 
 
@@ -248,12 +250,12 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                  */
         });
 
-        deleteDish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteDish(dish);
-            }
-        });
+//        deleteDish.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                deleteDish(dish);
+//            }
+//        });
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,6 +5,7 @@
     android:id="@+id/recycle_menu_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10sp"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,15 +16,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/dish_pic"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/braised_pork_meatball"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal_background" />
+            app:riv_corner_radius="10dp"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="clamp" />
+        <!--        -->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/dish_pic"-->
+        <!--            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal_background" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
