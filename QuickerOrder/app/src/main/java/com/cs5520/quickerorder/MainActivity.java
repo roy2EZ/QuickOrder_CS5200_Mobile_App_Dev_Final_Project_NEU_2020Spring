@@ -1,23 +1,13 @@
 package com.cs5520.quickerorder;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.cs5520.quickerorder.ui.main.SectionsPagerAdapter;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity  {
     private static final String TAG = "Main";

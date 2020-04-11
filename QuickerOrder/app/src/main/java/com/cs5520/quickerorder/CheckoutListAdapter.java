@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 import java.util.Map;
 
@@ -46,9 +48,32 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
         // Log.d(TAG, "onBindViewHolder: " + mDishList.get(listPosition).getId());
         holder.dishID.setText(String.valueOf(MainActivity.menu.get(mDishList.get(listPosition).getId()).getName()));
         holder.dishQuantity.setText(String.valueOf(mDishList.get(listPosition).getQuantity()));
-        holder.deleteCheckout.setOnClickListener(new View.OnClickListener() {
+//        holder.deleteCheckout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mDishList.get(listPosition).getQuantity() > 1) {
+//                    mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() - 1);
+//                    mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
+//                    notifyDataSetChanged();
+//                } else {
+//                    mViewModel.deleteDish(mDishList.get(listPosition).getId());
+//                    mDishList.remove(listPosition);
+//                    notifyDataSetChanged();
+//                }
+//            }
+//        });
+        holder.addCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() + 1);
+                mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
+                notifyDataSetChanged();
+            }
+        });
+        holder.minusCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 if (mDishList.get(listPosition).getQuantity() > 1) {
                     mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() - 1);
                     mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
@@ -58,14 +83,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
                     mDishList.remove(listPosition);
                     notifyDataSetChanged();
                 }
-            }
-        });
-        holder.addCheckout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() + 1);
-                mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
-                notifyDataSetChanged();
+
             }
         });
     }
@@ -73,8 +91,9 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView dishID;
         TextView dishQuantity;
-        Button addCheckout;
-        Button deleteCheckout;
+        FloatingActionButton addCheckout;
+        FloatingActionButton minusCheckout;
+//        Button deleteCheckout;
 
 
         ViewHolder(View itemView) {
@@ -82,7 +101,8 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             dishID = itemView.findViewById(R.id.dish_id_card);
             dishQuantity = itemView.findViewById(R.id.textview_quantity_checkout);
             addCheckout = itemView.findViewById(R.id.cart_dish_add);
-            deleteCheckout = itemView.findViewById(R.id.cart_dish_remove);
+            minusCheckout = itemView.findViewById(R.id.cart_dish_minus);
+//            deleteCheckout = itemView.findViewById(R.id.cart_dish_remove);
 
 /*
             addCheckout.setOnClickListener(new View.OnClickListener() {

@@ -1,100 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tableLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AAD0DF"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/btn_close_pop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close" />
-
-    <RelativeLayout
+    <android.gesture.GestureOverlayView
+        android:id="@+id/gOverlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.gesture.GestureOverlayView
-            android:id="@+id/gOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:foregroundGravity="top"
-            android:fadeDuration = "1000"
-            android:gestureStrokeType = "multiple"
-            android:gestureStrokeSquarenessThreshold = "0">
-
-        </android.gesture.GestureOverlayView>
+        android:layout_height="500dp"
+        android:foregroundGravity="top"
+        android:fadeDuration="1000"
+        android:gestureStrokeType="multiple"
+        android:gestureStrokeSquarenessThreshold="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></android.gesture.GestureOverlayView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:foregroundGravity="bottom">
+            android:layout_height="wrap_content"
+            android:foregroundGravity="bottom"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_close_pop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:tint="#000000"
+                android:layout_margin="5dp"
+                app:backgroundTint="#BAB4B4"
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <ImageView
+                android:id="@+id/dish_image_pop"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/the_picture_of_the_dish"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:srcCompat="?android:attr/actionModeWebSearchDrawable"
+                tools:targetApi="lollipop" />
 
             <TextView
                 android:id="@+id/dish_name_pop"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="Name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/dish_desp_pop"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="description"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                android:layout_margin="10sp"
+                android:text="@string/name"
+                android:textAppearance="@style/DishTitle"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dish_image_pop"
+                android:textColor="#333333" />
 
             <TextView
                 android:id="@+id/dish_price_pop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintLeft_toLeftOf="@id/dish_name_pop"
-                app:layout_constraintTop_toBottomOf="@id/dish_name_pop" />
+                android:layout_margin="10sp"
+                android:text="@string/price"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textColor="#333333"
+                app:layout_constraintTop_toBottomOf="@+id/dish_image_pop" />
 
-            <ImageView
-                android:id="@+id/dish_image_pop"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:layout_constraintBottom_toTopOf="@+id/dish_desp_pop"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="?android:attr/actionModeWebSearchDrawable"
-                tools:targetApi="lollipop" />
+            <TextView
+                android:id="@+id/dish_desp_pop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/a_delicious_dish"
+                android:textSize="20sp"
+                android:layout_margin="10sp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textColor="#888888"
+                app:layout_constraintTop_toBottomOf="@+id/dish_name_pop" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <Button
+        android:id="@+id/add_dish_pop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/round_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/add_to_cart" />
 
-        <Button
-            android:id="@+id/delete_dish_pop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="delete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/add_dish_pop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:id="@+id/tableLayout"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:background="#AAD0DF"-->
+    <!--    android:orientation="vertical">-->
+
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_close_pop"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Close" />-->
+
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <android.gesture.GestureOverlayView-->
+    <!--            android:id="@+id/gOverlay"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="500dp"-->
+    <!--            android:foregroundGravity="top"-->
+    <!--            android:fadeDuration = "1000"-->
+    <!--            android:gestureStrokeType = "multiple"-->
+    <!--            android:gestureStrokeSquarenessThreshold = "0">-->
+
+    <!--        </android.gesture.GestureOverlayView>-->
+
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--            android:id="@+id/constraintLayout2"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="500dp"-->
+    <!--            android:foregroundGravity="bottom">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/dish_name_pop"-->
+    <!--                android:layout_width="100dp"-->
+    <!--                android:layout_height="100dp"-->
+    <!--                android:text="Name"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/dish_desp_pop"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="description"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/dish_price_pop"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="TextView"-->
+    <!--                app:layout_constraintLeft_toLeftOf="@id/dish_name_pop"-->
+    <!--                app:layout_constraintTop_toBottomOf="@id/dish_name_pop" />-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/dish_image_pop"-->
+    <!--                android:layout_width="100dp"-->
+    <!--                android:layout_height="100dp"-->
+    <!--                app:layout_constraintBottom_toTopOf="@+id/dish_desp_pop"-->
+    <!--                app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:srcCompat="?android:attr/actionModeWebSearchDrawable"-->
+    <!--                tools:targetApi="lollipop" />-->
+    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--    </RelativeLayout>-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/delete_dish_pop"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="delete"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/add_dish_pop"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="add"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+    <!--</LinearLayout>-->
