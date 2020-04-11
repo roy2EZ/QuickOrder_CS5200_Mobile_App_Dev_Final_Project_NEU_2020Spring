@@ -81,7 +81,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 for (OrderDish d: dishes) {
                     t += MainActivity.menu.get(d.getId()).getPrice() * d.getQuantity();
                 }
-                total.setText(String.valueOf(t));
+                total.setText(String.format("%.2f", t));
             }
         });
     }
