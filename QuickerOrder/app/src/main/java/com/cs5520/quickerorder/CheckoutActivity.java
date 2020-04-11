@@ -41,6 +41,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private MySensorListener mySensorListener;
     private float mlux;
 
+    private TextView total;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class CheckoutActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView_checkout);
         mRecyclerView.setHasFixedSize(true);
         // mLayoutManager = new LinearLayoutManager(this);
+        total = findViewById(R.id.total_checkout);
 
         order = new HashMap<>();
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
@@ -72,6 +75,11 @@ public class CheckoutActivity extends AppCompatActivity {
         mViewModel.getAllDishes().observe(this, new Observer<List<OrderDish>>() {
             @Override public void onChanged(@Nullable final List<OrderDish> dishes) {
                 adapter.setmDishList(dishes);
+                double t = 0;
+                for (OrderDish d: dishes) {
+                    t += MainActivity.menu.get(d.getId()).getPrice() * d.getQuantity();
+                }
+                total.setText(String.valueOf(t));
             }
         });
     }
