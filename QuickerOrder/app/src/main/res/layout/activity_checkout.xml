@@ -35,34 +35,41 @@
                 android:id="@+id/textView_subtoal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subtotal"
+                android:text="@string/subtotal"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textAppearance="@style/ToolbarTitle"
+
+                android:layout_margin="10sp"/>
 
             <TextView
                 android:id="@+id/total_checkout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:numeric="decimal"
-                android:textAlignment="viewEnd"
-                android:textSize="15sp"
+                android:ems="5"
+                android:gravity="end"
+                android:textSize="20sp"
+                android:layout_marginEnd="10sp"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textAppearance="@style/ToolbarTitle"/>
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:text="$"
+                android:text="@string/dollar_sign"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/total_checkout"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -70,7 +77,10 @@
             android:id="@+id/button_checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Checkout"
+            android:text="@string/checkout"
+            android:background="@drawable/round_button"
+            android:layout_margin="10sp"
+            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -189,6 +189,8 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         FloatingActionButton closeBtn = (FloatingActionButton) contentView.findViewById(R.id.btn_close_pop);
         TextView dishName = (TextView) contentView.findViewById(R.id.dish_name_pop);
         TextView dishPrice = (TextView) contentView.findViewById(R.id.dish_price_pop);
+
+        TextView dishDescription = (TextView) contentView.findViewById(R.id.dish_desp_pop);
         GestureOverlayView gOverlay = contentView.findViewById(R.id.gOverlay);
 
         final Button addDish = (Button) contentView.findViewById(R.id.add_dish_pop);
@@ -197,7 +199,8 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
 
         dishName.setText(dish.getName());
-        dishPrice.setText(String.valueOf(dish.getPrice()));
+        dishPrice.setText(new StringBuilder().append("$").append(String.valueOf(dish.getPrice())));
+        dishDescription.setText(dish.getDescription());
         Log.d(TAG, "showPopupWindow: " + dish.getPic());
         dishImage.setImageResource(dish.getPic());
 
@@ -211,7 +214,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
 
                 if (predictions.size() > 0 && predictions.get(0).score > 4) {
-                    if (predictions.get(0).name.startsWith("circle")) {
+                    if (predictions.get(0).name.startsWith("circle")||predictions.get(0).name.startsWith("0")||predictions.get(0).name.startsWith("o")) {
                         addDish(dish);
                     } else if (predictions.get(0).name.startsWith("x")) {
                         deleteDish(dish);
@@ -276,10 +279,10 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
     private void addDish(Dishes dish) {
         if (order.containsKey(dish.getId())) {
             order.put(dish.getId(), order.get(dish.getId()) + 1);
-            orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
+            orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId())), dish.getPrice()));
         } else {
             order.put(dish.getId(), 1);
-            orderRepository.insertDish(new OrderDish(dish.getId(), 1));
+            orderRepository.insertDish(new OrderDish(dish.getId(), 1, dish.getPrice()));
         }
         Toast.makeText(getContext(), ADDDISH, ADDDISH.length()).show();
     }
@@ -288,7 +291,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         if (order.containsKey(dish.getId())) {
             if (order.get(dish.getId()) > 1) {
                 order.put(dish.getId(), order.get(dish.getId()) - 1);
-                orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId()))));
+                orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId())), dish.getPrice()));
             } else {
                 order.remove(dish.getId());
                 orderRepository.deleteDish(dish.getId());
