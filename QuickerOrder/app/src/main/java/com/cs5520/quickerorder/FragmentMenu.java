@@ -9,6 +9,7 @@ import android.gesture.Prediction;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 
 import android.view.Gravity;
@@ -92,85 +93,29 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         // TODO: put it into main service
 
         menu = new ArrayList<>(MainActivity.menu.values());
-        /*
-        Dishes d1 = new Dishes(1, "Big Mac", R.drawable.bigmac, 10.0);
-        Dishes d2 = new Dishes(2, "Spicy chicken sandwich", R.drawable.spicychicken, 5.5);
-        Dishes d3 = new Dishes(3, "Fillet Fish", R.drawable.fish, 9.99);
-        menu = new LinkedList<>();
-        Dishes d1 = new Dishes(1, "Shredded Potato", R.drawable.shredded_potato, 7.99);
-        Dishes d2 = new Dishes(2, "Crispy Chicken with Bone", R.drawable.crispy_chichen_with_bone, 14.99);
-        Dishes d3 = new Dishes(3, "Fried Pork in Scoop", R.drawable.fried_pork_in_scoop, 17.99);
-        Dishes d4 = new Dishes(4, "Pork Belly with Sauerkraut", R.drawable.pork_belly_with_sauerkraut, 15.99);
-        Dishes d5 = new Dishes(5, "Potato and Bean with Rib", R.drawable.potato_and_bean_with_pork_rib, 14.99);
-        Dishes d6 = new Dishes(6, "Rib with Vermincelli", R.drawable.rib_with_vermincelli, 15.99);
-        Dishes d7 = new Dishes(7, "Stewed Chicken with Mushroom", R.drawable.stewed_chicken_with_mushroom, 16.99);
-        Dishes d8 = new Dishes(8, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99);
-        Dishes d9 = new Dishes(9, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99);
-        Dishes d10 = new Dishes(10, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99);
-
-        menu.add(d1);
-        menu.add(d2);
-        menu.add(d3);
-        menu.add(d4);
-        menu.add(d5);
-        menu.add(d6);
-        menu.add(d7);
-        menu.add(d8);
-        menu.add(d9);
-        menu.add(d10);
-
-         */
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-
+        observerSetup();
 
         order = new HashMap<>();
 
-        observerSetup();
-
-
-
-
-        // orderDishes.stream().forEach(x -> order.put(x.getId(), x.getQuantity()));
 
     }
     private void observerSetup() {
-        orderRepository.getAllDish().observe(this, new Observer<List<OrderDish>>() {
+        mViewModel.getAllDishes().removeObservers(this);
+        mViewModel.getAllDishes().observe(this, new Observer<List<OrderDish>>() {
             @Override
             public void onChanged(List<OrderDish> dishes) {
                 order.clear();
-                for (OrderDish d: dishes) {
+                for (OrderDish d : dishes) {
                     order.put(d.getId(), d.getQuantity());
                 }
             }
         });
     }
 
-    /*
-
-        mViewModel.getAllWebs().observe(this, new Observer<List<Websites>>() {
-            @Override
-            public void onChanged(@Nullable final List<Websites> websites) {
-                if(mWebList.size() > 0){
-                    mWebList.clear();
-                }
-                if(websites != null){
-                    mWebList.addAll(websites);
-                }
-                adapter.notifyDataSetChanged();
-
-                adapter.setmWebItem(websites);
-            }
-        });
-    }
-
- */
-
-
-
     @Override
     public void onItemClick(int pos) {
-        Log.d(TAG, "onItemClick: pos" + pos);
         Log.d(TAG, "onItemClick: " + menu.get(pos).toString());
         showPopupWindow(menu.get(pos));
     }
@@ -304,5 +249,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         super.onAttach(context);
         this.gLibrary = ((MainService) getActivity()).passTo();
         this.orderRepository = ((MainService) getActivity()).passRepository();
+
     }
+
 }
