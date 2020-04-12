@@ -48,6 +48,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
         // Log.d(TAG, "onBindViewHolder: " + mDishList.get(listPosition).getId());
         holder.dishID.setText(String.valueOf(MainActivity.menu.get(mDishList.get(listPosition).getId()).getName()));
         holder.dishQuantity.setText(String.valueOf(mDishList.get(listPosition).getQuantity()));
+        holder.dishPrice.setText(new StringBuilder().append("$").append(String.valueOf(mDishList.get(listPosition).getPrice())));
 //        holder.deleteCheckout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -66,7 +67,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             @Override
             public void onClick(View v) {
                 mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() + 1);
-                mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
+                mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity(), mDishList.get(listPosition).getPrice()));
                 notifyDataSetChanged();
             }
         });
@@ -76,7 +77,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
 
                 if (mDishList.get(listPosition).getQuantity() > 1) {
                     mDishList.get(listPosition).setQuantity(mDishList.get(listPosition).getQuantity() - 1);
-                    mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity()));
+                    mViewModel.update(new OrderDish(mDishList.get(listPosition).getId(), mDishList.get(listPosition).getQuantity(), mDishList.get(listPosition).getPrice()));
                     notifyDataSetChanged();
                 } else {
                     mViewModel.deleteDish(mDishList.get(listPosition).getId());
@@ -91,6 +92,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView dishID;
         TextView dishQuantity;
+        TextView dishPrice;
         FloatingActionButton addCheckout;
         FloatingActionButton minusCheckout;
 //        Button deleteCheckout;
@@ -100,6 +102,7 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
             super(itemView);
             dishID = itemView.findViewById(R.id.dish_id_card);
             dishQuantity = itemView.findViewById(R.id.textview_quantity_checkout);
+            dishPrice = itemView.findViewById(R.id.cart_dish_price);
             addCheckout = itemView.findViewById(R.id.cart_dish_add);
             minusCheckout = itemView.findViewById(R.id.cart_dish_minus);
 //            deleteCheckout = itemView.findViewById(R.id.cart_dish_remove);

@@ -55,7 +55,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final MenuListAdapter.ViewHolder holder, final int listPosition) {
         holder.dishName.setText(String.valueOf(menu.get(listPosition).getName()));
-        holder.dishPrice.setText(String.valueOf(menu.get(listPosition).getPrice()));
+        holder.dishPrice.setText(new StringBuilder().append("$").append(String.valueOf(menu.get(listPosition).getPrice())));
         holder.dishImage.setImageBitmap( decodeSampledBitmapFromResource(this.context.getResources(), menu.get(listPosition).getPic(), 100, 100)
                 ); //dishPrice.setText(String.valueOf(menu.get(listPosition).getPrice()));
     }

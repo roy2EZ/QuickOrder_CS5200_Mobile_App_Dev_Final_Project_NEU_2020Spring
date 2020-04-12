@@ -18,9 +18,13 @@ public class  OrderDish {
     @ColumnInfo(name = "quantity")
     private int quantity;
 
-    public OrderDish(int id, int quantity) {
+    @ColumnInfo(name = "price")
+    private double price;
+
+    public OrderDish(int id, int quantity, double price) {
         this.id = id;
         this.quantity = quantity;
+        this.price = price;
     }
 
     public int getId() {
@@ -37,5 +41,12 @@ public class  OrderDish {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getPrice() {return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

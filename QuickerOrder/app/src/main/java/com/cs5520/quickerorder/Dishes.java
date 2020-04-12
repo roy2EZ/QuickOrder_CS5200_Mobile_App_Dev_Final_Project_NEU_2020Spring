@@ -6,6 +6,7 @@ public class Dishes extends Item {
     private int id;
     private String name;
     private @DrawableRes int pic;
+    private String description;
 
     private double price;
 
@@ -17,11 +18,20 @@ public class Dishes extends Item {
         this.price = price;
     }
 
-    public Dishes(int id, String name, @DrawableRes int pic, double price) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Dishes(int id, String name, @DrawableRes int pic, double price, String description) {
         this.id = id;
         this.name = name;
         this.pic = pic;
         this.price = price;
+        this.description = description;
     }
 
     @Override
