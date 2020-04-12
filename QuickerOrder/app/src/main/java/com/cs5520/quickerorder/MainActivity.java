@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity  {
         menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99, "Classic Northeastern Chinese dessert of deep-fired and caramelized sweet potato.\n"));
         menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99, "AKA “Lion’s Head” Meatball. A Classic Huaiyang cuisine dish consisting of large pork meatballs stewed with vegetables.\n"));
         menu.put(15,  new Dishes(15, "Yangcheng Lake Crab", R.drawable.yangchenghu_crab, 30.99, ": A delicacy of Suzhou. Steamed fresh lake crab with a ginger-and-vinegar sauce."));
-        menu.put(12, new Dishes(12, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99, "AKA Tang Yuan with sliced osmanthus. A very unique dessert soup.\n"));
-        menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99, "Classic Northeastern Chinese dessert of deep-fired and caramelized sweet potato.\n"));
-        menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99, "AKA “Lion’s Head” Meatball. A Classic Huaiyang cuisine dish consisting of large pork meatballs stewed with vegetables.\n"));
-        menu.put(15,  new Dishes(15, "Yangcheng Lake Crab", R.drawable.yangchenghu_crab, 30.99, "A delicacy of Suzhou. Steamed fresh lake crab with a ginger-and-vinegar sauce."));
-        //menu.put(11, new Dishes(11, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
+//        menu.put(12, new Dishes(12, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99, "AKA Tang Yuan with sliced osmanthus. A very unique dessert soup.\n"));
+//        menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99, "Classic Northeastern Chinese dessert of deep-fired and caramelized sweet potato.\n"));
+//        menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99, "AKA “Lion’s Head” Meatball. A Classic Huaiyang cuisine dish consisting of large pork meatballs stewed with vegetables.\n"));
+//        menu.put(15,  new Dishes(15, "Yangcheng Lake Crab", R.drawable.yangchenghu_crab, 30.99, "A delicacy of Suzhou. Steamed fresh lake crab with a ginger-and-vinegar sauce."));
+//        //menu.put(11, new Dishes(11, "Corn with Salted Egg Yolk", R.drawable.sweet_corn_with_salted_egg_yolk, 12.99));
         //menu.put(12, new Dishes(12, "Sweet Riceball with Osmanthus", R.drawable.sweet_fermented_riceball_with_osmanthus, 13.99));
         //menu.put(13, new Dishes(13, "Caramelized Sweet Potato", R.drawable.caramelized_sweet_potato, 14.99));
         //menu.put(14, new Dishes(14, "Braised Pork Meatball", R.drawable.braised_pork_meatball, 14.99));

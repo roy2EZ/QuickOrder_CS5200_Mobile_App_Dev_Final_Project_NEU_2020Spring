@@ -34,35 +34,61 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/food1"
+        android:background="@drawable/food2"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
+        <TextView
+            android:id="@+id/Welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="211dp"
+            android:layout_marginBottom="90dp"
+            android:fontFamily="@font/alex_brush"
+            android:gravity="center"
+            android:text="@string/welcome"
+            android:textColor="@color/colorAccent"
+            android:textSize="60dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/button_goto_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.611" />
+
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/whitelayer">
+            android:id="@+id/appCompatImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/whitelayer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
         </androidx.appcompat.widget.AppCompatImageView>
 
         <Button
             android:id="@+id/button_goto_menu"
-            android:layout_width="225dp"
-            android:layout_height="52dp"
-            android:onClick="gotoMainService"
-            app:strokeColor="@color/colorAccent"
+            android:layout_width="211dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="360dp"
+            android:alpha="1"
             android:background="@drawable/round_button"
-            app:strokeWidth="2dp"
-            android:alpha="0.9"
+            android:onClick="gotoMainService"
             android:text="@string/main_menu"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.145"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.553" />
+            app:strokeColor="@color/colorAccent"
+            app:strokeWidth="2dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

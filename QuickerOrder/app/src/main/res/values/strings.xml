@@ -41,4 +41,5 @@
     <string name="subtotal">SUBTOTAL:</string>
     <string name="dollar_sign">$</string>
     <string name="main_menu">Main Menu</string>
+    <string name="welcome">Welcome</string>
 </resources>
