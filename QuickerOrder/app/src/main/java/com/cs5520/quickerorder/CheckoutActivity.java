@@ -120,7 +120,7 @@ public class CheckoutActivity extends AppCompatActivity {
             //获取光线强度
             float lux = event.values[0];
 
-            if (lux < 50 && mlux > 50) checkout();
+            if (lux < 5 && mlux > 5) checkout();
 
             mlux = lux;
         }
