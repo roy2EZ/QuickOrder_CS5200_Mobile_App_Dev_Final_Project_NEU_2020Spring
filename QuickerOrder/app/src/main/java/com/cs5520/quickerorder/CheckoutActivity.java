@@ -142,4 +142,10 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
 
+
+    public void orderButton(View view) {
+        checkout();
+    }
+
+
 }

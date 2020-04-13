@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ import java.util.Objects;
 
 // TODO: configure UI
 public class FragmentCallService extends Fragment implements SensorEventListener {
+
+    private static final String NEEDSENT = "A Server is on the way.";
     private SensorManager mSensorManager;
 
     private final int SPEED_SHRESHOLD = 5000;
@@ -38,6 +41,14 @@ public class FragmentCallService extends Fragment implements SensorEventListener
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_call_service, container, false);
+        Button button = view.findViewById(R.id.button_manually_call_service);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callService();
+            }
+        });
+
         return view;
     }
 
@@ -74,9 +85,13 @@ public class FragmentCallService extends Fragment implements SensorEventListener
                 / timeInterval * 10000;
         // 达到速度阀值，发出提示
         if (speed >= SPEED_SHRESHOLD) {
-            Toast.makeText(this.getContext(), "Need call service!", (int) 10).show();
+            callService();
         }
 
+    }
+
+    private void callService() {
+        Toast.makeText(this.getContext(), NEEDSENT, NEEDSENT.length()).show();
     }
 
     @Override
@@ -95,4 +110,6 @@ public class FragmentCallService extends Fragment implements SensorEventListener
         super.onStop();
         mSensorManager.unregisterListener(this);
     }
+
+
 }
