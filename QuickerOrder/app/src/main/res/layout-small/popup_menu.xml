@@ -65,7 +65,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/dish_image_pop" />
 
             <TextView
                 android:id="@+id/dish_price_pop"
@@ -79,7 +79,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/dish_image_pop" />
 
             <TextView
                 android:id="@+id/dish_desp_pop"
@@ -97,10 +97,9 @@
 
             <Button
                 android:id="@+id/add_dish_pop"
-                android:layout_width="274dp"
+                android:layout_width="match_parent"
                 android:layout_height="29dp"
                 android:layout_margin="10dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/round_button"
                 android:text="@string/add_to_cart"
@@ -109,8 +108,8 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <LinearLayout
-                android:layout_width="325dp"
-                android:layout_height="195dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
@@ -121,23 +120,27 @@
 
                 <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="97dp"
+                    android:layout_height="116dp"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/circle"
                     android:gravity="center_horizontal"
                     android:padding="5dp"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
                     android:text="@string/draw_a_circle_to_add"
                     android:textColor="@color/colorHint"
                     android:textSize="8sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="91dp"
+                    android:layout_height="116dp"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/cross"
                     android:gravity="center_horizontal"
                     android:padding="5dp"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
                     android:text="@string/draw_a_cross_to_remove"
                     android:textColor="@color/colorHint"
                     android:textSize="8sp" />
