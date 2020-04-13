@@ -46,7 +46,7 @@
 
         <ImageView
             android:id="@+id/dish_image_pop"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="211dp"
             android:contentDescription="@string/the_picture_of_the_dish"
             android:scaleType="centerCrop"
