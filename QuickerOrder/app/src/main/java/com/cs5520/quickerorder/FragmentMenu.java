@@ -251,4 +251,10 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.gLibrary = ((MainService) getActivity()).passTo();
+        this.orderRepository = ((MainService) getActivity()).passRepository();
+    }
 }
