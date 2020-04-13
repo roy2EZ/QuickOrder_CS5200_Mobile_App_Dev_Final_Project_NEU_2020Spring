@@ -156,7 +156,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
                 ArrayList<Prediction> predictions = gLibrary.recognize(gesture);
 
 
-                if (predictions.size() > 0 && predictions.get(0).score > 4) {
+                if (predictions!= null && predictions.size() > 0 && predictions.get(0).score > 4) {
                     if (predictions.get(0).name.startsWith("circle")||predictions.get(0).name.startsWith("0")||predictions.get(0).name.startsWith("o")) {
                         addDish(dish);
                     } else if (predictions.get(0).name.startsWith("x")) {
