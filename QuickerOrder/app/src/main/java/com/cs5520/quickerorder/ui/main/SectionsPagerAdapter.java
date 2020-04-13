@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.cs5520.quickerorder.FragmentCallService;
 import com.cs5520.quickerorder.FragmentMenu;
+import com.cs5520.quickerorder.FragmentSpecial;
 import com.cs5520.quickerorder.R;
 
 /**
@@ -37,7 +38,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
 
         fullmenu = new FragmentMenu();
-        special = new FragmentMenu();
+        special = new FragmentSpecial();
         callservice = new FragmentCallService();
 
     }
