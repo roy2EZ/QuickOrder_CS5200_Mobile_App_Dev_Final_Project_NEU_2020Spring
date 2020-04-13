@@ -51,7 +51,6 @@ public class CheckoutActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView_checkout);
         mRecyclerView.setHasFixedSize(true);
 
-        
         // mLayoutManager = new LinearLayoutManager(this);
         total = findViewById(R.id.total_checkout);
 

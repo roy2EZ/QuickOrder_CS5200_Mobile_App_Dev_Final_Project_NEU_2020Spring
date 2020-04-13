@@ -46,21 +46,20 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
     private static final String DELETEDISH = "Deleted!";
     private static final String NOITEM ="No such item in cart!";
     private static final String NOTRECOGNIZE ="Gesture is not recognized!";
-    private MenuListAdapter adapter;
-    private RecyclerView mRecyclerView;
+    protected MenuListAdapter adapter;
+    protected RecyclerView mRecyclerView;
 
-    private OrderRepository orderRepository;
-
+    protected OrderRepository orderRepository;
 
     private List<Dishes> menu;
 
     private  List<OrderDish> orderDishes;
-    private Map<Integer, Integer> order;
+    protected Map<Integer, Integer> order;
 
-    private MainViewModel mViewModel;
+    protected MainViewModel mViewModel;
 
-    private PopupWindow mPopWindow;
-    private GestureLibrary gLibrary;
+    protected PopupWindow mPopWindow;
+    protected GestureLibrary gLibrary;
 
     @Nullable
     @Override
@@ -88,7 +87,6 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         // add dish into our menu
         // TODO: put it into main service
 
@@ -101,7 +99,8 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
 
 
     }
-    private void observerSetup() {
+
+    protected void observerSetup() {
         mViewModel.getAllDishes().removeObservers(this);
         mViewModel.getAllDishes().observe(this, new Observer<List<OrderDish>>() {
             @Override
@@ -120,8 +119,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         showPopupWindow(menu.get(pos));
     }
 
-
-    private void showPopupWindow(final Dishes dish) {
+    protected void showPopupWindow(final Dishes dish) {
         //设置contentView
         View contentView = LayoutInflater.from(this.getContext()).inflate(R.layout.popup_menu, null);
 
@@ -215,13 +213,11 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         View rootview = LayoutInflater.from(this.getContext()).inflate(R.layout.activity_main_service
                 , null);
 
-
-
         mPopWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
 
     }
 
-    private void addDish(Dishes dish) {
+    protected void addDish(Dishes dish) {
         if (order.containsKey(dish.getId())) {
             order.put(dish.getId(), order.get(dish.getId()) + 1);
             orderRepository.updateDish(new OrderDish(dish.getId(), order.get((dish.getId())), dish.getPrice()));
@@ -232,7 +228,7 @@ public class FragmentMenu extends Fragment implements MenuListAdapter.OnDishClic
         Toast.makeText(getContext(), ADDDISH, ADDDISH.length()).show();
     }
 
-    private void deleteDish(Dishes dish) {
+    protected void deleteDish(Dishes dish) {
         if (order.containsKey(dish.getId())) {
             if (order.get(dish.getId()) > 1) {
                 order.put(dish.getId(), order.get(dish.getId()) - 1);
