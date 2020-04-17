@@ -1,8 +1,8 @@
 # QuickerOrder
 
-# App description
+## App description
 It is an application where the users can order dishes by themselves in a restaurant, and ask for related service in the app. We try to add some small functions with a little bit of interaction and fun for our users, and also utilize more sensors and features of Android phones to apply what we learn from this class.  
-# Fulfilled Features
+## Fulfilled Features
 - FULL MENU of tasty Chinese food dishes displayed in a pull-down list with name, price and picture of each dish. Utilized database related knowledge from class.
 - HOUSE SPECIAL menu which provides a specific recommendation dish to the customer.
 - ADD TO CART page for a dish, with interesting gesture drawing features:
