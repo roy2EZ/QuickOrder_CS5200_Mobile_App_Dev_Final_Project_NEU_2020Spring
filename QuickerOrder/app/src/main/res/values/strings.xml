@@ -35,13 +35,13 @@
     <string name="remove">Remove</string>
     <string name="splash" />
     <string name="a_delicious_dish">A delicious dish.</string>
-    <string name="draw_a_circle_to_add">Draw a circle to add.</string>
-    <string name="draw_a_cross_to_remove">Draw a cross to remove.</string>
+    <string name="draw_a_circle_to_add">Try draw a circle to add.</string>
+    <string name="draw_a_cross_to_remove">Try draw a cross to remove.</string>
     <string name="checkout">Checkout</string>
     <string name="subtotal">SUBTOTAL:</string>
     <string name="dollar_sign">$</string>
     <string name="main_menu">Main Menu</string>
     <string name="welcome">Welcome</string>
-    <string name="flip_your_phone_to_checkout">Flip your phone to checkout.</string>
-    <string name="face_your_phone_down_on_a_table_to_checkout">Face your phone down on a table to checkout</string>
+    <string name="face_your_phone_down_on_a_table_to_checkout"><u>TRY ALSO:</u> Face your phone down on a table to order</string>
+    <string name="order">Order</string>
 </resources>
