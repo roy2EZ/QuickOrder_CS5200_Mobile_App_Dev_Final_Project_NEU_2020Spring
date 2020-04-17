@@ -105,7 +105,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 mViewModel.deleteDish(o.getId());
             }
             Toast.makeText(getApplicationContext(), "Checked out!", (int) 1).show();
-        }else {
+        }else if (mOrder != null && mOrder.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Your cart is empty! Add something~", (int) 1).show();
         }
     }
